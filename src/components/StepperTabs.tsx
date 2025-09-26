@@ -9,13 +9,11 @@ import {
   useTheme,
   useMediaQuery,
   Typography,
-  Chip
 } from '@mui/material';
 import {
   Person as PersonIcon,
   VerifiedUser as LicenseIcon,
   CreditCard as CreditIcon,
-  Payment as PaymentIcon,
   Loyalty as LoyaltyIcon,
   AccountBalance as TaxIcon,
   CheckCircle as ReviewIcon
@@ -30,12 +28,15 @@ const StepperTabs: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+
+  // Breakpoints
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md')); // >=900px
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md')); // 600px–899px
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // <600px
+
   const [value, setValue] = useState(0);
   const [stepStatuses, setStepStatuses] = useState<StepStatus[]>([
     { completed: false, current: true },
-    { completed: false, current: false },
     { completed: false, current: false },
     { completed: false, current: false },
     { completed: false, current: false },
@@ -44,13 +45,54 @@ const StepperTabs: React.FC = () => {
   ]);
 
   const steps = [
-    { label: 'About You and your Practice', path: '/step1', shortLabel: 'About You', icon: <PersonIcon /> },
-    { label: 'Practitioner Licensing', path: '/step2', shortLabel: 'Licensing', icon: <LicenseIcon /> },
-    { label: 'Customer Line of Credit', path: '/step3', shortLabel: 'Credit', icon: <CreditIcon /> },
-    { label: 'Auto Pay Enrollment', path: '/step4', shortLabel: 'Auto Pay', icon: <PaymentIcon /> },
-    { label: 'Loyalty Enrollment', path: '/step5', shortLabel: 'Loyalty', icon: <LoyaltyIcon /> },
-    { label: 'Tax Exempt', path: '/step6', shortLabel: 'Tax Exempt', icon: <TaxIcon /> },
-    { label: 'Review and Finalize', path: '/step7', shortLabel: 'Review', icon: <ReviewIcon /> }
+    { 
+      label: 'About You and Your Practice', 
+      path: '/step1', 
+      shortLabel: 'About You', 
+      icon: <PersonIcon />,
+      line1: 'About You and',
+      line2: 'Your Practice'
+    },
+    { 
+      label: 'Practice Licensing', 
+      path: '/step2', 
+      shortLabel: 'Licensing', 
+      icon: <LicenseIcon />,
+      line1: 'Practice',
+      line2: 'Licensing'
+    },
+    { 
+      label: 'Credit Account', 
+      path: '/step3', 
+      shortLabel: 'Credit', 
+      icon: <CreditIcon />,
+      line1: 'Credit',
+      line2: 'Account'
+    },
+    { 
+      label: 'Patterson Advantage', 
+      path: '/step5', 
+      shortLabel: 'Loyalty', 
+      icon: <LoyaltyIcon />,
+      line1: 'Patterson',
+      line2: 'Advantage'
+    },
+    { 
+      label: 'Tax Exemption Status', 
+      path: '/step6', 
+      shortLabel: 'Tax Exempt', 
+      icon: <TaxIcon />,
+      line1: 'Tax Exemption',
+      line2: 'Status'
+    },
+    { 
+      label: 'Review and Submit', 
+      path: '/step7', 
+      shortLabel: 'Review', 
+      icon: <ReviewIcon />,
+      line1: 'Review and',
+      line2: 'Submit'
+    }
   ];
 
   // Update tab value based on current location
@@ -92,9 +134,36 @@ const StepperTabs: React.FC = () => {
     };
   };
 
+  const renderTabLabel = (step: typeof steps[0]) => {
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        {/* Show icons on desktop & tablet, hide only if too small */}
+        {!isMobile && step.icon}
+        
+        {/* Text content */}
+        {isDesktop ? (
+          // Desktop: Two lines
+          <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
+            <Typography variant="inherit" sx={{ fontSize: '0.8rem' }}>
+              {step.line1}
+            </Typography>
+            <Typography variant="inherit" sx={{ fontSize: '0.8rem' }}>
+              {step.line2}
+            </Typography>
+          </Box>
+        ) : (
+          // Tablet and Mobile: Single line short label
+          <Typography variant="inherit">
+            {step.shortLabel}
+          </Typography>
+        )}
+      </Box>
+    );
+  };
+
   return (
     <>
-      {/* Move heading outside the tabs container */}
+      {/* Heading */}
       <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 }, pt: 3, pb: 1 }}>
         <Typography 
           variant="h4" 
@@ -110,6 +179,7 @@ const StepperTabs: React.FC = () => {
         </Typography>
       </Container>
 
+      {/* Tabs */}
       <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 }, pb: 3 }}>
         <Paper 
           elevation={3} 
@@ -131,12 +201,12 @@ const StepperTabs: React.FC = () => {
               borderBottom: 1,
               borderColor: 'divider',
               '& .MuiTab-root': {
-                minHeight: isMobile ? 48 : 64,
+                minHeight: isMobile ? 48 : isDesktop ? 72 : 56, // Increased height for desktop to accommodate two lines
                 textTransform: 'none',
-                fontSize: isMobile ? '0.75rem' : '0.875rem',
+                fontSize: isMobile ? '0.7rem' : isTablet ? '0.8rem' : '0.9rem',
                 fontWeight: 500,
-                minWidth: isMobile ? 80 : 120,
-                px: isMobile ? 1 : 2,
+                minWidth: isMobile ? 80 : isTablet ? 100 : 140,
+                px: isMobile ? 1 : 1.5,
                 transition: 'all 0.2s ease-in-out',
               },
               '& .MuiTabs-indicator': {
@@ -153,14 +223,7 @@ const StepperTabs: React.FC = () => {
             {steps.map((step, index) => (
               <Tab
                 key={step.path}
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    {!isMobile && step.icon}
-                    <Typography variant="inherit">
-                      {index + 1}. {isMobile ? step.shortLabel : step.label}
-                    </Typography>
-                  </Box>
-                }
+                label={renderTabLabel(step)}
                 id={`tab-${index}`}
                 aria-controls={`tabpanel-${index}`}
                 sx={getTabStyle(index)}

@@ -273,89 +273,87 @@ const LoginPage: React.FC = () => {
           <Box component="form" onSubmit={handleLogin} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             
             {/* Email Id */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Enter Email Id*
-              </Typography>
-              <TextField
-                fullWidth
-                type="email"
-                placeholder="Enter Email Id"
-                value={formData.email}
-                onChange={handleInputChange('email')}
-                variant="outlined"
-                required
-                error={!!errors.email}
-                helperText={errors.email}
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              type="email"
+              label="Email ID"
+              value={formData.email}
+              onChange={handleInputChange('email')}
+              variant="outlined"
+              required
+              error={!!errors.email}
+              helperText={errors.email}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Password */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Enter Password*
-              </Typography>
-              <TextField
-                fullWidth
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleInputChange('password')}
-                variant="outlined"
-                required
-                error={!!errors.password}
-                helperText={errors.password}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword(!showPassword)}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              type={showPassword ? 'text' : 'password'}
+              label="Password"
+              value={formData.password}
+              onChange={handleInputChange('password')}
+              variant="outlined"
+              required
+              error={!!errors.password}
+              helperText={errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Forgot Password Link */}
             <Box sx={{ textAlign: 'right' }}>

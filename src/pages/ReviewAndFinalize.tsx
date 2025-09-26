@@ -14,7 +14,10 @@ import {
   useMediaQuery,
   FormHelperText,
   Divider,
-  Chip
+  Chip,
+  TextField,
+  Modal,
+  Backdrop
 } from '@mui/material';
 import {
   ExpandMore as ExpandMoreIcon,
@@ -55,6 +58,8 @@ const ReviewAndFinalize: React.FC = () => {
   const [formData, setFormData] = useState<AllFormData>(mockFetchAllData());
   const [finalConsent, setFinalConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [electronicSignature, setElectronicSignature] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const steps = [
     { label: '1. About You and your Practice', stepKey: 'step1', path: '/step1' },
@@ -76,11 +81,10 @@ const ReviewAndFinalize: React.FC = () => {
     setIsSubmitting(true);
     // Simulate API call to finalize submission
     console.log('Final Data Submission:', formData);
+    console.log('Electronic Signature:', electronicSignature);
     setTimeout(() => {
         setIsSubmitting(false);
-        alert('Customer Boarding Complete!');
-        // Navigate to a success page or dashboard
-        navigate('/'); 
+        setShowSuccessModal(true);
     }, 2000);
   };
 
@@ -173,35 +177,83 @@ const ReviewAndFinalize: React.FC = () => {
                         />
                     }
                     label={<Typography variant="body1" sx={{ fontWeight: 600 }}>I agree to the final declaration and authorize submission.</Typography>}
-                    sx={{ my: 2, '& .MuiFormControlLabel-label': { fontSize: '1rem' } }}
+                    sx={{ mb: 3, '& .MuiFormControlLabel-label': { fontSize: '1rem' } }}
                 />
 
-                <Box sx={{ 
-                    mt: 3, 
-                    display: 'flex', 
-                    justifyContent: 'flex-end'
-                }}>
-                    <Button
-                        size="large"
-                        variant="contained"
-                        color="success"
-                        endIcon={<FinalizeIcon />}
-                        onClick={handleFinalSubmit}
-                        disabled={!finalConsent || isSubmitting}
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Submit Final Application'}
-                    </Button>
+                {/* Electronic Signature Field */}
+                <Box sx={{ mb: 2 }}>
+                    <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 500 }}>
+                        Electronic Signature
+                    </Typography>
+                    <TextField
+                        fullWidth
+                        placeholder="Electronic Signature"
+                        value={electronicSignature}
+                        onChange={(e) => setElectronicSignature(e.target.value)}
+                        variant="outlined"
+                        size="small"
+                        sx={{ maxWidth: 600 }}
+                    />
                 </Box>
+
             </Box>
+
+            {/* Success Modal */}
+            <Modal
+                open={showSuccessModal}
+                onClose={() => setShowSuccessModal(false)}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: isMobile ? '90%' : '80%',
+                    maxWidth: 600,
+                    bgcolor: 'background.paper',
+                    borderRadius: 3,
+                    boxShadow: 24,
+                    p: 6,
+                    textAlign: 'center'
+                }}>
+                    <Typography 
+                        variant="h2" 
+                        sx={{ 
+                            mb: 4,
+                            fontWeight: 'bold',
+                            color: 'success.main',
+                            fontSize: { xs: '2.5rem', md: '3.5rem' }
+                        }}
+                    >
+                        Thank You!
+                    </Typography>
+
+                    <Typography 
+                        variant="h6" 
+                        sx={{ 
+                            mb: 4,
+                            color: 'text.secondary',
+                            lineHeight: 1.6
+                        }}
+                    >
+                        Application has been sent for Processing.
+                    </Typography>
+                </Box>
+            </Modal>
 
         </Box>
       </Paper>
       
-      {/* Navigation Buttons - Outside container, only Back button */}
+      {/* Navigation Buttons - Outside container */}
       <Box sx={{ 
         mt: 3, 
         display: 'flex', 
-        justifyContent: 'flex-start'
+        justifyContent: 'space-between'
       }}>
         <Button
           variant="outlined"
@@ -216,6 +268,21 @@ const ReviewAndFinalize: React.FC = () => {
           }}
         >
           Back
+        </Button>
+        
+        <Button
+          variant="contained"
+          size="medium"
+          onClick={handleFinalSubmit}
+          disabled={!finalConsent || !electronicSignature || isSubmitting}
+          sx={{ 
+            minWidth: 140,
+            py: 1,
+            fontSize: '0.95rem',
+            fontWeight: 600
+          }}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit'}
         </Button>
       </Box>
     </Container>

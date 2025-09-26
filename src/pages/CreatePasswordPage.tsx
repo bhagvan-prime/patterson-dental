@@ -276,100 +276,100 @@ const CreatePasswordPage: React.FC = () => {
           <Box component="form" onSubmit={handleSave} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             
             {/* Password */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Enter Password*
-              </Typography>
-              <TextField
-                fullWidth
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleInputChange('password')}
-                variant="outlined"
-                required
-                error={!!errors.password}
-                helperText={errors.password}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword(!showPassword)}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              type={showPassword ? 'text' : 'password'}
+              label="Password"
+              value={formData.password}
+              onChange={handleInputChange('password')}
+              variant="outlined"
+              required
+              error={!!errors.password}
+              helperText={errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Confirm Password */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Confirm Password*
-              </Typography>
-              <TextField
-                fullWidth
-                type={showConfirmPassword ? 'text' : 'password'}
-                placeholder="Confirm your password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange('confirmPassword')}
-                variant="outlined"
-                required
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle confirm password visibility"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        edge="end"
-                      >
-                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              type={showConfirmPassword ? 'text' : 'password'}
+              label="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleInputChange('confirmPassword')}
+              variant="outlined"
+              required
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle confirm password visibility"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Password Requirements */}
             <Box sx={{ mt: 1 }}>

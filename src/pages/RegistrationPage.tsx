@@ -263,109 +263,103 @@ const RegistrationPage: React.FC = () => {
           <Box component="form" onSubmit={handleContinue} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             
             {/* First Name */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Enter Your First Name*
-              </Typography>
-              <TextField
-                fullWidth
-                placeholder="Enter your First Name"
-                value={formData.firstName}
-                onChange={handleInputChange('firstName')}
-                variant="outlined"
-                required
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              label="First Name"
+              value={formData.firstName}
+              onChange={handleInputChange('firstName')}
+              variant="outlined"
+              required
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Last Name */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Enter Your Last Name*
-              </Typography>
-              <TextField
-                fullWidth
-                placeholder="Enter your Last Name"
-                value={formData.lastName}
-                onChange={handleInputChange('lastName')}
-                variant="outlined"
-                required
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              label="Last Name"
+              value={formData.lastName}
+              onChange={handleInputChange('lastName')}
+              variant="outlined"
+              required
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Email Id */}
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 500,
-                  fontSize: '14px',
-                  color: '#414651',
-                  mb: 1,
-                }}
-              >
-                Enter Email Id*
-              </Typography>
-              <TextField
-                fullWidth
-                type="email"
-                placeholder="Enter Email Id"
-                value={formData.email}
-                onChange={handleInputChange('email')}
-                variant="outlined"
-                required
-                error={!!errors.email}
-                helperText={errors.email}
-                InputProps={{
-                  sx: {
-                    borderRadius: '8px',
+            <TextField
+              fullWidth
+              type="email"
+              label="Email ID"
+              value={formData.email}
+              onChange={handleInputChange('email')}
+              variant="outlined"
+              required
+              error={!!errors.email}
+              helperText={errors.email}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '8px',
+                  height: '44px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
+                  '& input': {
+                    padding: '0 14px',
                     height: '44px',
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                    '& input': {
-                      padding: '10px 14px',
-                    },
+                    boxSizing: 'border-box',
                   },
-                }}
-              />
-            </Box>
+                  '& fieldset': {
+                    borderRadius: '8px',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, 12px) scale(1)',
+                  '&.Mui-focused, &.MuiFormLabel-filled': {
+                    transform: 'translate(14px, -9px) scale(0.75)',
+                  },
+                },
+              }}
+            />
 
             {/* Terms */}
             <FormControlLabel

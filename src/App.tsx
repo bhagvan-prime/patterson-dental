@@ -18,7 +18,7 @@ import StepperTabs from './components/StepperTabs';
 import PractitionerLicensing from './pages/PractitionerLicensing';
 import CreditLine from './pages/CreditLine';
 import AutoPayEnrollment from './pages/AutoPayEnrollment';
-import LoyaltyEnrollment from './pages/LoyaltyEnrollment';
+import PattersonAdvantage from './pages/PattersonAdvantage';
 import TaxExempt from './pages/TaxExempt';
 import ReviewAndFinalize from './pages/ReviewAndFinalize';
 
@@ -57,8 +57,8 @@ const AppContent: React.FC = () => {
           <Route path="/step1" element={<AboutYouAndYourPractice />} />
           <Route path="/step2" element={<PractitionerLicensing />} />
           <Route path="/step3" element={<CreditLine />} />
-          <Route path="/step4" element={<AutoPayEnrollment />} />
-          <Route path="/step5" element={<LoyaltyEnrollment />} />
+          {/* <Route path="/step4" element={<AutoPayEnrollment />} /> */}
+          <Route path="/step5" element={<PattersonAdvantage />} />
           <Route path="/step6" element={<TaxExempt />} />
           <Route path="/step7" element={<ReviewAndFinalize />} />
         </Routes>
