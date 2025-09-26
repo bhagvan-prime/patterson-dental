@@ -175,7 +175,7 @@ const StepperTabs: React.FC = () => {
             color: 'primary.main'
           }}
         >
-          Customer on Boarding Process
+          Customer Onboarding
         </Typography>
       </Container>
 

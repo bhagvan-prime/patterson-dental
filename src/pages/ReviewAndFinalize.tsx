@@ -64,10 +64,9 @@ const ReviewAndFinalize: React.FC = () => {
   const steps = [
     { label: '1. About You and your Practice', stepKey: 'step1', path: '/step1' },
     { label: '2. Practitioner Licensing', stepKey: 'step2', path: '/step2' },
-    { label: '3. Customer Line of Credit', stepKey: 'step3', path: '/step3' },
-    { label: '4. Auto Pay Enrollment', stepKey: 'step4', path: '/step4' },
-    { label: '5. Loyalty Enrollment', stepKey: 'step5', path: '/step5' },
-    { label: '6. Tax Exempt', stepKey: 'step6', path: '/step6' },
+    { label: '3. Credit Account', stepKey: 'step3', path: '/step3' },
+    { label: '4. Patterson Advantage', stepKey: 'step5', path: '/step5' },
+    { label: '5. Tax Exemption Status', stepKey: 'step6', path: '/step6' },
   ];
 
   const handleAccordionChange = (panel: string) => (
