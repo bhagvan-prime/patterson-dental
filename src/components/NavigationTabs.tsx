@@ -59,8 +59,8 @@ const NavigationTabs: React.FC = () => {
           indicatorColor="primary"
           textColor="primary"
           variant={isMobile ? "scrollable" : "fullWidth"}
-          scrollButtons={isMobile ? "auto" : false}
-          allowScrollButtonsMobile
+          // scrollButtons={false}
+          // allowScrollButtonsMobile
           aria-label="navigation tabs"
           sx={{
             borderBottom: 1,

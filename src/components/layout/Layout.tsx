@@ -47,8 +47,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                       left: { lg: '53px' }, 
                       
                       // >>>>>> CORRECTED LOGO DIMENSIONS BASED ON YOUR LATEST SPECS <<<<<<
-                      width: { xs: '41px', lg: '113px' }, 
-                      height: { xs: '19px', lg: '53px' },   
+                      width: { xs: '50px', lg: '113px' }, 
+                      height: { xs: '30px', lg: '53px' },   
                       objectFit: 'contain',
                       
                       // Mobile alignment within the blue box
@@ -77,14 +77,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           {/* Mobile Navigation */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="start"
               color="inherit"
               onClick={handleMenuClick}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Menu
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}

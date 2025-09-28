@@ -72,7 +72,7 @@ const StepperTabs: React.FC = () => {
     { 
       label: 'Patterson Advantage', 
       path: '/step5', 
-      shortLabel: 'Loyalty', 
+      shortLabel: 'Advantage', 
       icon: <LoyaltyIcon />,
       line1: 'Patterson',
       line2: 'Advantage'
