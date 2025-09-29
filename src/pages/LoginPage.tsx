@@ -1,4 +1,4 @@
-// src/pages/LoginPage.tsx - Fixed Deprecation Warning
+// src/pages/LoginPage.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -7,9 +7,13 @@ import {
   InputAdornment,
   IconButton,
   Link,
+  Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+
+// Common components
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
 
@@ -25,32 +29,39 @@ interface FormErrors {
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
   });
+  
   const [errors, setErrors] = useState<FormErrors>({
     email: '',
     password: '',
   });
+  
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
+  // SIMPLE EMAIL VALIDATION
   const validateEmail = (email: string): string => {
     const trimmedEmail = email.trim();
     if (!trimmedEmail) {
-      return 'Email Id is required.';
+      return t('common:validation.emailRequired');
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmedEmail)) {
-      return 'Please enter a valid email address.';
+      return t('common:validation.emailInvalid');
     }
     return '';
   };
 
+  // SIMPLE PASSWORD VALIDATION (just check if not empty)
   const validatePassword = (password: string): string => {
     if (!password) {
-      return 'Password is required.';
+      return t('common:validation.passwordRequired');
     }
     return '';
   };
@@ -61,6 +72,7 @@ const LoginPage: React.FC = () => {
     const value = event.target.value;
     setFormData(prev => ({ ...prev, [field]: value }));
 
+    // Clear errors when user types
     if (field === 'email' && errors.email) {
       setErrors(prev => ({ ...prev, email: '' }));
     }
@@ -85,16 +97,23 @@ const LoginPage: React.FC = () => {
 
     setIsSubmitting(true);
 
+    // SIMPLIFIED: Store and navigate (no API call)
     setTimeout(() => {
-      console.log('Login Data:', formData);
+      console.log('Login successful');
+      
+      setSuccessMessage(t('auth:login.success'));
       setIsSubmitting(false);
-      navigate('/step1');
-    }, 1500);
+
+      setTimeout(() => {
+        navigate('/step1');
+      }, 1000);
+    }, 500);
   };
 
   const handleReset = () => {
     setFormData({ email: '', password: '' });
     setErrors({ email: '', password: '' });
+    setSuccessMessage('');
   };
 
   const isLoginDisabled =
@@ -179,7 +198,7 @@ const LoginPage: React.FC = () => {
               mb: { xs: 0.5, lg: 1 },
             }}
           >
-            Patterson Dental
+            {t('common:branding.companyName')}
           </Typography>
 
           <Typography
@@ -190,7 +209,7 @@ const LoginPage: React.FC = () => {
               mb: { xs: 1, lg: 1.5 },
             }}
           >
-            Patterson equipment solutions
+            {t('common:branding.tagline')}
           </Typography>
 
           <Typography
@@ -201,8 +220,7 @@ const LoginPage: React.FC = () => {
               lineHeight: 1.5,
             }}
           >
-            Access your account to explore our Comprehensive range of dental
-            equipment and innovative solutions
+            {t('common:branding.description')}
           </Typography>
         </Box>
       </Box>
@@ -246,28 +264,33 @@ const LoginPage: React.FC = () => {
               mt: { xs: 0, md: 1 },
             }}
           >
-            Login
+            {t('auth:login.title')}
           </Typography>
+
+          {/* Success Message */}
+          {successMessage && (
+            <Alert severity="success" sx={{ mb: 2 }}>
+              {successMessage}
+            </Alert>
+          )}
 
           <Box
             component="form"
             onSubmit={handleLogin}
             sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
           >
-            {/* Email Input */}
             <CommonInput
               type="email"
-              label="Email ID"
+              label={t('auth:login.email')}
               value={formData.email}
               onChange={handleInputChange('email')}
               required
               errorMessage={errors.email}
             />
 
-            {/* Password Input - FIXED: Using slotProps instead of InputProps */}
             <CommonInput
               type={showPassword ? 'text' : 'password'}
-              label="Password"
+              label={t('auth:login.password')}
               value={formData.password}
               onChange={handleInputChange('password')}
               required
@@ -299,7 +322,7 @@ const LoginPage: React.FC = () => {
                   fontFamily: 'Inter, Arial, sans-serif',
                 }}
               >
-                Forgot Password?
+                {t('auth:login.forgotPassword')}
               </Link>
             </Box>
 
@@ -308,8 +331,9 @@ const LoginPage: React.FC = () => {
                 variant="secondary"
                 onClick={handleReset}
                 sx={{ flex: 1 }}
+                disabled={isSubmitting}
               >
-                Reset
+                {t('common:buttons.reset')}
               </CommonButton>
 
               <CommonButton
@@ -319,7 +343,7 @@ const LoginPage: React.FC = () => {
                 loading={isSubmitting}
                 sx={{ flex: 1 }}
               >
-                Login
+                {t('common:buttons.login')}
               </CommonButton>
             </Box>
 
@@ -331,7 +355,7 @@ const LoginPage: React.FC = () => {
                   color: '#666666',
                 }}
               >
-                Don't have an account?{' '}
+                {t('auth:login.noAccount')}{' '}
                 <Link
                   href="/"
                   underline="always"
@@ -341,7 +365,7 @@ const LoginPage: React.FC = () => {
                     fontWeight: 500,
                   }}
                 >
-                  Sign up here
+                  {t('auth:login.signUpLink')}
                 </Link>
               </Typography>
             </Box>

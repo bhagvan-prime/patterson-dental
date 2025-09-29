@@ -1,28 +1,40 @@
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Container } from '@mui/material';
+
+// Redux Store
+import { store } from './store/store';
+
+// Theme
 import theme from './theme';
+
+// Components
 import Layout from './components/layout/Layout';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import StepperPage from './pages/StepperPage';
-import VerticalStepperPage from './pages/VerticalStepperPage';
+import StepperTabs from './components/StepperTabs';
+
+// Pages - Auth
 import RegistrationPage from './pages/RegistrationPage';
 import CreatePasswordPage from './pages/CreatePasswordPage';
 import LoginPage from './pages/LoginPage';
-import NavigationTabs from './components/NavigationTabs';
+
+// Pages - Application Flow
 import AboutYouAndYourPractice from './pages/AboutYouAndYourPractice';
-import StepperTabs from './components/StepperTabs';
 import PractitionerLicensing from './pages/PractitionerLicensing';
 import CreditLine from './pages/CreditLine';
-import AutoPayEnrollment from './pages/AutoPayEnrollment';
 import PattersonAdvantage from './pages/PattersonAdvantage';
 import TaxExempt from './pages/TaxExempt';
 import ReviewAndFinalize from './pages/ReviewAndFinalize';
 
-// Component to handle conditional layout
+/**
+ * AppContent - Handles conditional layout rendering
+ * 
+ * Auth pages (/, /create-password, /login) - No layout
+ * Application pages (/step1-7) - With layout and stepper
+ */
 const AppContent: React.FC = () => {
   const location = useLocation();
   
@@ -47,12 +59,6 @@ const AppContent: React.FC = () => {
       <StepperTabs />
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Routes>
-          {/* Uncomment these if needed
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/stepper" element={<StepperPage />} />
-          <Route path="/vertical" element={<VerticalStepperPage />} /> */}
-          
           {/* Main application flow pages (with layout) */}
           <Route path="/step1" element={<AboutYouAndYourPractice />} />
           <Route path="/step2" element={<PractitionerLicensing />} />
@@ -67,14 +73,24 @@ const AppContent: React.FC = () => {
   );
 };
 
+/**
+ * Main App Component
+ * 
+ * Wraps entire application with:
+ * - Redux Provider
+ * - MUI Theme Provider
+ * - Router
+ */
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <AppContent />
-      </Router>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <AppContent />
+        </Router>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

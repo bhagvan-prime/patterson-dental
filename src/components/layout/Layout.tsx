@@ -3,35 +3,31 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   Box,
-  IconButton,
   Menu,
-  MenuItem,
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    handleMenuClose();
-  };
+  // const handleNavigation = (path: string) => {
+  //   navigate(path);
+  //   handleMenuClose();
+  // };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

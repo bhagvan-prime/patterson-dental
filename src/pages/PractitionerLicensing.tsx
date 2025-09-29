@@ -309,7 +309,7 @@ const PractitionerLicensing: React.FC = () => {
                 }}
               >
                 <CommonButton
-                  variant="secondary"
+                  variant="primary"
                   onClick={() => handleSave('tdddd-info')}
                   disabled={!editMode.panel2}
                   sx={{ minWidth: 100 }}

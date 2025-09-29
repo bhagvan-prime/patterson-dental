@@ -1,18 +1,22 @@
-// src/pages/RegistrationPage.tsx - Form Aligned with Image
+// src/pages/RegistrationPage.tsx
 import React, { useState } from 'react';
 import {
   Box,
   Container,
   Typography,
   Link,
+  Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-// Import our common components
+// Redux
+// import { useRegisterMutation } from '../services/api';
+
+// Common components
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
-import { PRCheckbox } from '../components/commons';
-
+import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
 
 interface FormData {
   firstName: string;
@@ -27,25 +31,32 @@ interface FormErrors {
 
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     agreedToTerms: false,
   });
+  
   const [errors, setErrors] = useState<FormErrors>({
     email: '',
   });
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
+  // SIMPLE EMAIL VALIDATION - accepts any format with @ and .
   const validateEmail = (email: string): string => {
     const trimmedEmail = email.trim();
     if (!trimmedEmail) {
-      return 'Email Id is required.';
+      return t('common:validation.emailRequired');
     }
+    // Very basic check: has @ and at least one dot after @
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmedEmail)) {
-      return 'Please enter a valid email address.';
+      return t('common:validation.emailInvalid');
     }
     return '';
   };
@@ -57,13 +68,12 @@ const RegistrationPage: React.FC = () => {
     let value: string | boolean =
       target.type === 'checkbox' ? target.checked : target.value;
 
-    if (field === 'email') {
-      if (errors.email) {
-        setErrors(prev => ({ ...prev, email: '' }));
-      }
-    }
-
     setFormData(prev => ({ ...prev, [field]: value as any }));
+
+    // Clear email error when user types
+    if (field === 'email' && errors.email) {
+      setErrors(prev => ({ ...prev, email: '' }));
+    }
   };
 
   const handleContinue = async (event: React.FormEvent) => {
@@ -86,11 +96,18 @@ const RegistrationPage: React.FC = () => {
 
     setIsSubmitting(true);
 
+    // SIMPLIFIED: Store data and navigate (no API call for now)
     setTimeout(() => {
-      console.log('Registration Data:', formData);
+      localStorage.setItem('registration_email', formData.email);
+      localStorage.setItem('registration_name', `${formData.firstName} ${formData.lastName}`);
+      
+      setSuccessMessage(t('auth:register.success'));
       setIsSubmitting(false);
-      navigate('/create-password');
-    }, 1500);
+      
+      setTimeout(() => {
+        navigate('/create-password');
+      }, 1000);
+    }, 500);
   };
 
   const handleCancel = () => {
@@ -101,6 +118,7 @@ const RegistrationPage: React.FC = () => {
       agreedToTerms: false,
     });
     setErrors({ email: '' });
+    setSuccessMessage('');
   };
 
   const isContinueDisabled =
@@ -156,7 +174,6 @@ const RegistrationPage: React.FC = () => {
           }}
         />
 
-        {/* Image - This is what we're aligning to */}
         <Box
           component="img"
           src="/images/dental.png"
@@ -187,7 +204,7 @@ const RegistrationPage: React.FC = () => {
               mb: { xs: 0.5, lg: 1 },
             }}
           >
-            Patterson Dental
+            {t('common:branding.companyName')}
           </Typography>
 
           <Typography
@@ -198,7 +215,7 @@ const RegistrationPage: React.FC = () => {
               mb: { xs: 1, lg: 1.5 },
             }}
           >
-            Patterson equipment solutions
+            {t('common:branding.tagline')}
           </Typography>
 
           <Typography
@@ -209,24 +226,19 @@ const RegistrationPage: React.FC = () => {
               lineHeight: 1.5,
             }}
           >
-            Access your account to explore our Comprehensive range of dental
-            equipment and innovative solutions
+            {t('common:branding.description')}
           </Typography>
         </Box>
       </Box>
 
-      {/* RIGHT: Form panel - CHANGED ALIGNMENT */}
+      {/* RIGHT: Form panel */}
       <Box
         sx={{
           flex: 1,
           minHeight: { xs: 'auto', lg: '923px' },
           display: 'flex',
-
-          // REMOVED: alignItems: 'center' - this was centering vertically
-          // ADDED: alignItems: 'flex-start' - starts from top
           alignItems: { xs: 'center', lg: 'flex-start' },
           justifyContent: 'center',
-
           backgroundColor: '#FFFFFF',
           pt: { xs: '42px', lg: 0 },
           pb: { xs: '42px', lg: 0 },
@@ -246,10 +258,6 @@ const RegistrationPage: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             gap: 3,
-
-            // ADDED: Top margin to align with image position
-            // Left side: pt: 164px (padding) + some space = image starts around 164px
-            // We want form to align with image, so add top margin
             mt: { xs: 0, lg: '180px' },
           }}
         >
@@ -263,8 +271,15 @@ const RegistrationPage: React.FC = () => {
               mt: { xs: 0, md: 1 },
             }}
           >
-            Signup
+            {t('auth:register.title')}
           </Typography>
+
+          {/* Success Message */}
+          {successMessage && (
+            <Alert severity="success" sx={{ mb: 2 }}>
+              {successMessage}
+            </Alert>
+          )}
 
           <Box
             component="form"
@@ -272,14 +287,14 @@ const RegistrationPage: React.FC = () => {
             sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
           >
             <CommonInput
-              label="First Name"
+              label={t('auth:register.firstName')}
               value={formData.firstName}
               onChange={handleInputChange('firstName')}
               required
             />
 
             <CommonInput
-              label="Last Name"
+              label={t('auth:register.lastName')}
               value={formData.lastName}
               onChange={handleInputChange('lastName')}
               required
@@ -287,14 +302,14 @@ const RegistrationPage: React.FC = () => {
 
             <CommonInput
               type="email"
-              label="Email ID"
+              label={t('auth:register.email')}
               value={formData.email}
               onChange={handleInputChange('email')}
               required
               errorMessage={errors.email}
             />
 
-            <PRCheckbox
+            <CommonCheckbox
               checked={formData.agreedToTerms}
               onChange={handleInputChange('agreedToTerms')}
               label={
@@ -306,20 +321,19 @@ const RegistrationPage: React.FC = () => {
                     color: '#666666',
                   }}
                 >
-                  By clicking on continue you have confirm that you have read
-                  and understood our{' '}
+                  {t('auth:register.termsAgreement')}
                   <Link
                     href="#"
                     underline="always"
                     sx={{ color: '#1976d2', fontSize: '12px' }}
                   >
-                    Privacy Policies
+                    {t('auth:register.privacyPolicy')}
                   </Link>
                 </Typography>
               }
               checkboxProps={{
                 sx: {
-                  mr: 1,  // The margin-right you had
+                  mr: 1,
                 }
               }}
               labelProps={{
@@ -335,8 +349,9 @@ const RegistrationPage: React.FC = () => {
                 variant="secondary"
                 onClick={handleCancel}
                 sx={{ flex: 1 }}
+                disabled={isSubmitting}
               >
-                Cancel
+                {t('common:buttons.cancel')}
               </CommonButton>
 
               <CommonButton
@@ -346,8 +361,31 @@ const RegistrationPage: React.FC = () => {
                 loading={isSubmitting}
                 sx={{ flex: 1 }}
               >
-                Continue
+                {t('common:buttons.continue')}
               </CommonButton>
+            </Box>
+
+            <Box sx={{ textAlign: 'center', mt: 1 }}>
+              <Typography
+                sx={{
+                  fontFamily: 'Inter, Arial, sans-serif',
+                  fontSize: '14px',
+                  color: '#666666',
+                }}
+              >
+                {t('auth:register.haveAccount')}{' '}
+                <Link
+                  href="/login"
+                  underline="always"
+                  sx={{
+                    color: '#1976d2',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                  }}
+                >
+                  {t('auth:register.signInLink')}
+                </Link>
+              </Typography>
             </Box>
           </Box>
         </Container>

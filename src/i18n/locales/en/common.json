@@ -1,0 +1,48 @@
+{
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "reset": "Reset",
+    "submit": "Submit",
+    "login": "Login",
+    "logout": "Logout",
+    "signUp": "Sign Up",
+    "close": "Close",
+    "confirm": "Confirm"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "emailRequired": "Email Id is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordTooShort": "Password must be at least 8 characters long.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordRequirements": {
+      "title": "Password must contain:",
+      "minLength": "At least 8 characters",
+      "uppercase": "One uppercase letter (A-Z)",
+      "lowercase": "One lowercase letter (a-z)",
+      "number": "One number (0-9)",
+      "special": "One special character (@$!%*?&)"
+    }
+  },
+  "errors": {
+    "network": "Network error. Please try again.",
+    "serverError": "Server error. Please contact support.",
+    "somethingWrong": "Something went wrong. Please try again.",
+    "unauthorized": "Unauthorized. Please login again."
+  },
+  "messages": {
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "success": "Operation successful",
+    "processing": "Processing..."
+  },
+  "branding": {
+    "companyName": "Patterson Dental",
+    "tagline": "Patterson equipment solutions",
+    "description": "Access your account to explore our Comprehensive range of dental equipment and innovative solutions"
+  }
+}

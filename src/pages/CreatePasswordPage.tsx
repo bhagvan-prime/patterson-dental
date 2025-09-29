@@ -1,4 +1,4 @@
-// src/pages/CreatePasswordPage.tsx - REFACTORED VERSION
+// src/pages/CreatePasswordPage.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -6,11 +6,13 @@ import {
   Typography,
   InputAdornment,
   IconButton,
+  Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-// ✅ Import our common components
+// Common components
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
 
@@ -26,37 +28,62 @@ interface FormErrors {
 
 const CreatePasswordPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState<FormData>({
     password: '',
     confirmPassword: '',
   });
+  
   const [errors, setErrors] = useState<FormErrors>({
     password: '',
     confirmPassword: '',
   });
+  
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isSaving, setIsSaving] = useState(false); // ✅ For loading state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  
+  // Get email from registration
+  // const registrationEmail = localStorage.getItem('registration_email');
 
+  // Redirect if no email found
+  // useEffect(() => {
+  //   if (!registrationEmail) {
+  //     navigate('/');
+  //   }
+  // }, [registrationEmail, navigate]);
+
+  // FIXED PASSWORD VALIDATION
   const validatePassword = (password: string): string => {
     if (!password) {
-      return 'Password is required.';
+      return t('common:validation.passwordRequired');
     }
     if (password.length < 8) {
-      return 'Password must be at least 8 characters long.';
+      return t('common:validation.passwordTooShort');
     }
-    if (!/(?=.*[a-z])/.test(password)) {
+    
+    // Check for lowercase
+    if (!/[a-z]/.test(password)) {
       return 'Password must contain at least one lowercase letter.';
     }
-    if (!/(?=.*[A-Z])/.test(password)) {
+    
+    // Check for uppercase
+    if (!/[A-Z]/.test(password)) {
       return 'Password must contain at least one uppercase letter.';
     }
-    if (!/(?=.*\d)/.test(password)) {
+    
+    // Check for digit
+    if (!/[0-9]/.test(password)) {
       return 'Password must contain at least one number.';
     }
-    if (!/(?=.*[@$!%*?&])/.test(password)) {
+    
+    // Check for special character - FIXED REGEX
+    if (!/[@$!%*?&#^()_+=\-[\]{}|;:'",.<>/\\]/.test(password)) {
       return 'Password must contain at least one special character.';
     }
+    
     return '';
   };
 
@@ -68,7 +95,7 @@ const CreatePasswordPage: React.FC = () => {
       return 'Please confirm your password.';
     }
     if (confirmPassword !== password) {
-      return 'Passwords do not match.';
+      return t('common:validation.passwordMismatch');
     }
     return '';
   };
@@ -105,15 +132,23 @@ const CreatePasswordPage: React.FC = () => {
       return;
     }
 
-    // ✅ Show loading state
-    setIsSaving(true);
+    setIsSubmitting(true);
 
-    // Simulate API call
+    // SIMPLIFIED: Store and navigate (no API call)
     setTimeout(() => {
       console.log('Password created successfully');
-      setIsSaving(false);
-      navigate('/login');
-    }, 1500);
+      
+      // Clear registration data
+      localStorage.removeItem('registration_email');
+      localStorage.removeItem('registration_name');
+      
+      setSuccessMessage(t('auth:createPassword.success'));
+      setIsSubmitting(false);
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+    }, 500);
   };
 
   const handleBack = () => {
@@ -155,7 +190,6 @@ const CreatePasswordPage: React.FC = () => {
           gap: { lg: '10px' },
         }}
       >
-        {/* Logo */}
         <Box
           component="img"
           src="/images/logo.png"
@@ -173,7 +207,6 @@ const CreatePasswordPage: React.FC = () => {
           }}
         />
 
-        {/* Image */}
         <Box
           component="img"
           src="/images/dental.png"
@@ -188,7 +221,6 @@ const CreatePasswordPage: React.FC = () => {
           }}
         />
 
-        {/* Text block */}
         <Box
           sx={{
             textAlign: 'center',
@@ -205,7 +237,7 @@ const CreatePasswordPage: React.FC = () => {
               mb: { xs: 0.5, lg: 1 },
             }}
           >
-            Patterson Dental
+            {t('common:branding.companyName')}
           </Typography>
 
           <Typography
@@ -216,7 +248,7 @@ const CreatePasswordPage: React.FC = () => {
               mb: { xs: 1, lg: 1.5 },
             }}
           >
-            Patterson equipment solutions
+            {t('common:branding.tagline')}
           </Typography>
 
           <Typography
@@ -227,8 +259,7 @@ const CreatePasswordPage: React.FC = () => {
               lineHeight: 1.5,
             }}
           >
-            Access your account to explore our Comprehensive range of dental
-            equipment and innovative solutions
+            {t('common:branding.description')}
           </Typography>
         </Box>
       </Box>
@@ -262,7 +293,6 @@ const CreatePasswordPage: React.FC = () => {
             gap: 3,
           }}
         >
-          {/* Title */}
           <Typography
             sx={{
               fontFamily: 'Poppins, Roboto, Arial, sans-serif',
@@ -273,19 +303,24 @@ const CreatePasswordPage: React.FC = () => {
               mt: { xs: 0, md: 1 },
             }}
           >
-            Create Password
+            {t('auth:createPassword.title')}
           </Typography>
 
-          {/* Form */}
+          {/* Success Message */}
+          {successMessage && (
+            <Alert severity="success" sx={{ mb: 2 }}>
+              {successMessage}
+            </Alert>
+          )}
+
           <Box
             component="form"
             onSubmit={handleSave}
             sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
           >
-            {/* ✅ COMMON INPUT - Password */}
             <CommonInput
               type={showPassword ? 'text' : 'password'}
-              label="Password"
+              label={t('auth:createPassword.password')}
               value={formData.password}
               onChange={handleInputChange('password')}
               required
@@ -307,10 +342,9 @@ const CreatePasswordPage: React.FC = () => {
               }}
             />
 
-            {/* ✅ COMMON INPUT - Confirm Password */}
             <CommonInput
               type={showConfirmPassword ? 'text' : 'password'}
-              label="Confirm Password"
+              label={t('auth:createPassword.confirmPassword')}
               value={formData.confirmPassword}
               onChange={handleInputChange('confirmPassword')}
               required
@@ -343,80 +377,45 @@ const CreatePasswordPage: React.FC = () => {
                   mb: 1,
                 }}
               >
-                Password must contain:
+                {t('common:validation.passwordRequirements.title')}
               </Typography>
               <Box sx={{ pl: 2 }}>
-                <Typography
-                  sx={{
-                    fontFamily: 'Inter, Arial, sans-serif',
-                    fontSize: '11px',
-                    color: '#666666',
-                    lineHeight: 1.4,
-                  }}
-                >
-                  • At least 8 characters
+                <Typography sx={{ fontFamily: 'Inter, Arial, sans-serif', fontSize: '11px', color: '#666666', lineHeight: 1.4 }}>
+                  • {t('common:validation.passwordRequirements.minLength')}
                 </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Inter, Arial, sans-serif',
-                    fontSize: '11px',
-                    color: '#666666',
-                    lineHeight: 1.4,
-                  }}
-                >
-                  • One uppercase letter (A-Z)
+                <Typography sx={{ fontFamily: 'Inter, Arial, sans-serif', fontSize: '11px', color: '#666666', lineHeight: 1.4 }}>
+                  • {t('common:validation.passwordRequirements.uppercase')}
                 </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Inter, Arial, sans-serif',
-                    fontSize: '11px',
-                    color: '#666666',
-                    lineHeight: 1.4,
-                  }}
-                >
-                  • One lowercase letter (a-z)
+                <Typography sx={{ fontFamily: 'Inter, Arial, sans-serif', fontSize: '11px', color: '#666666', lineHeight: 1.4 }}>
+                  • {t('common:validation.passwordRequirements.lowercase')}
                 </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Inter, Arial, sans-serif',
-                    fontSize: '11px',
-                    color: '#666666',
-                    lineHeight: 1.4,
-                  }}
-                >
-                  • One number (0-9)
+                <Typography sx={{ fontFamily: 'Inter, Arial, sans-serif', fontSize: '11px', color: '#666666', lineHeight: 1.4 }}>
+                  • {t('common:validation.passwordRequirements.number')}
                 </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: 'Inter, Arial, sans-serif',
-                    fontSize: '11px',
-                    color: '#666666',
-                    lineHeight: 1.4,
-                  }}
-                >
-                  • One special character (@$!%*?&)
+                <Typography sx={{ fontFamily: 'Inter, Arial, sans-serif', fontSize: '11px', color: '#666666', lineHeight: 1.4 }}>
+                  • {t('common:validation.passwordRequirements.special')}
                 </Typography>
               </Box>
             </Box>
 
-            {/* ✅ COMMON BUTTONS - Back & Save */}
             <Box sx={{ display: 'flex', gap: 2 }}>
               <CommonButton
                 variant="secondary"
                 onClick={handleBack}
                 sx={{ flex: 1 }}
+                disabled={isSubmitting}
               >
-                Back
+                {t('common:buttons.back')}
               </CommonButton>
 
               <CommonButton
                 type="submit"
                 variant="primary"
                 disabled={isSaveDisabled}
-                loading={isSaving}
+                loading={isSubmitting}
                 sx={{ flex: 1 }}
               >
-                Save
+                {t('common:buttons.save')}
               </CommonButton>
             </Box>
           </Box>

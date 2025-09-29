@@ -24,15 +24,66 @@ interface StepStatus {
   current: boolean;
 }
 
+// MOVE THIS OUTSIDE THE COMPONENT
+const steps = [
+  { 
+    label: 'About You and Your Practice', 
+    path: '/step1', 
+    shortLabel: 'About You', 
+    icon: <PersonIcon />,
+    line1: 'About You and',
+    line2: 'Your Practice'
+  },
+  { 
+    label: 'Practice Licensing', 
+    path: '/step2', 
+    shortLabel: 'Licensing', 
+    icon: <LicenseIcon />,
+    line1: 'Practice',
+    line2: 'Licensing'
+  },
+  { 
+    label: 'Credit Account', 
+    path: '/step3', 
+    shortLabel: 'Credit', 
+    icon: <CreditIcon />,
+    line1: 'Credit',
+    line2: 'Account'
+  },
+  { 
+    label: 'Patterson Advantage', 
+    path: '/step5', 
+    shortLabel: 'Advantage', 
+    icon: <LoyaltyIcon />,
+    line1: 'Patterson',
+    line2: 'Advantage'
+  },
+  { 
+    label: 'Tax Exemption Status', 
+    path: '/step6', 
+    shortLabel: 'Tax Exempt', 
+    icon: <TaxIcon />,
+    line1: 'Tax Exemption',
+    line2: 'Status'
+  },
+  { 
+    label: 'Review and Submit', 
+    path: '/step7', 
+    shortLabel: 'Review', 
+    icon: <ReviewIcon />,
+    line1: 'Review and',
+    line2: 'Submit'
+  }
+];
+
 const StepperTabs: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
 
-  // Breakpoints
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md')); // >=900px
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md')); // 600px–899px
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // <600px
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [value, setValue] = useState(0);
   const [stepStatuses, setStepStatuses] = useState<StepStatus[]>([
@@ -44,69 +95,17 @@ const StepperTabs: React.FC = () => {
     { completed: false, current: false }
   ]);
 
-  const steps = [
-    { 
-      label: 'About You and Your Practice', 
-      path: '/step1', 
-      shortLabel: 'About You', 
-      icon: <PersonIcon />,
-      line1: 'About You and',
-      line2: 'Your Practice'
-    },
-    { 
-      label: 'Practice Licensing', 
-      path: '/step2', 
-      shortLabel: 'Licensing', 
-      icon: <LicenseIcon />,
-      line1: 'Practice',
-      line2: 'Licensing'
-    },
-    { 
-      label: 'Credit Account', 
-      path: '/step3', 
-      shortLabel: 'Credit', 
-      icon: <CreditIcon />,
-      line1: 'Credit',
-      line2: 'Account'
-    },
-    { 
-      label: 'Patterson Advantage', 
-      path: '/step5', 
-      shortLabel: 'Advantage', 
-      icon: <LoyaltyIcon />,
-      line1: 'Patterson',
-      line2: 'Advantage'
-    },
-    { 
-      label: 'Tax Exemption Status', 
-      path: '/step6', 
-      shortLabel: 'Tax Exempt', 
-      icon: <TaxIcon />,
-      line1: 'Tax Exemption',
-      line2: 'Status'
-    },
-    { 
-      label: 'Review and Submit', 
-      path: '/step7', 
-      shortLabel: 'Review', 
-      icon: <ReviewIcon />,
-      line1: 'Review and',
-      line2: 'Submit'
-    }
-  ];
-
   // Update tab value based on current location
   useEffect(() => {
     const currentTabIndex = steps.findIndex(step => step.path === location.pathname);
     if (currentTabIndex !== -1) {
       setValue(currentTabIndex);
-      // Update step statuses
       setStepStatuses(prev => prev.map((status, index) => ({
         completed: index < currentTabIndex,
         current: index === currentTabIndex
       })));
     }
-  }, [location.pathname]);
+  }, [location.pathname]); // Now ESLint won't complain
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -137,12 +136,9 @@ const StepperTabs: React.FC = () => {
   const renderTabLabel = (step: typeof steps[0]) => {
     return (
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        {/* Show icons on desktop & tablet, hide only if too small */}
         {!isMobile && step.icon}
         
-        {/* Text content */}
         {isDesktop ? (
-          // Desktop: Two lines
           <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
             <Typography variant="inherit" sx={{ fontSize: '0.8rem' }}>
               {step.line1}
@@ -152,7 +148,6 @@ const StepperTabs: React.FC = () => {
             </Typography>
           </Box>
         ) : (
-          // Tablet and Mobile: Single line short label
           <Typography variant="inherit">
             {step.shortLabel}
           </Typography>
@@ -163,7 +158,6 @@ const StepperTabs: React.FC = () => {
 
   return (
     <>
-      {/* Heading */}
       <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 }, pt: 3, pb: 1 }}>
         <Typography 
           variant="h4" 
@@ -179,7 +173,6 @@ const StepperTabs: React.FC = () => {
         </Typography>
       </Container>
 
-      {/* Tabs */}
       <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2 }, pb: 3 }}>
         <Paper 
           elevation={3} 
@@ -201,7 +194,7 @@ const StepperTabs: React.FC = () => {
               borderBottom: 1,
               borderColor: 'divider',
               '& .MuiTab-root': {
-                minHeight: isMobile ? 48 : isDesktop ? 72 : 56, // Increased height for desktop to accommodate two lines
+                minHeight: isMobile ? 48 : isDesktop ? 72 : 56,
                 textTransform: 'none',
                 fontSize: isMobile ? '0.7rem' : isTablet ? '0.8rem' : '0.9rem',
                 fontWeight: 500,
