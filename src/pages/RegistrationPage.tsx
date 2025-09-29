@@ -1,15 +1,18 @@
+// src/pages/RegistrationPage.tsx - Form Aligned with Image
 import React, { useState } from 'react';
 import {
   Box,
-  Button,
   Container,
-  TextField,
   Typography,
-  Checkbox,
-  FormControlLabel,
   Link,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+
+// Import our common components
+import CommonInput from '../components/commons/inputs/CommonInput';
+import CommonButton from '../components/commons/buttons/CommonButton';
+import { CommonCheckbox } from '../components/commons';
+
 
 interface FormData {
   firstName: string;
@@ -33,25 +36,26 @@ const RegistrationPage: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({
     email: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateEmail = (email: string): string => {
     const trimmedEmail = email.trim();
     if (!trimmedEmail) {
       return 'Email Id is required.';
     }
-    
-    // Basic email regex pattern
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmedEmail)) {
       return 'Please enter a valid email address.';
     }
-    
     return '';
   };
 
-  const handleInputChange = (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (field: keyof FormData) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const target = event.target as HTMLInputElement;
-    let value: string | boolean = target.type === 'checkbox' ? target.checked : target.value;
+    let value: string | boolean =
+      target.type === 'checkbox' ? target.checked : target.value;
 
     if (field === 'email') {
       if (errors.email) {
@@ -62,22 +66,31 @@ const RegistrationPage: React.FC = () => {
     setFormData(prev => ({ ...prev, [field]: value as any }));
   };
 
-  const handleContinue = (event: React.FormEvent) => {
-    event.preventDefault(); 
+  const handleContinue = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     const emailError = validateEmail(formData.email);
-    
+
     if (emailError) {
       setErrors({ email: emailError });
-      return; 
+      return;
     }
 
-    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.agreedToTerms) {
-        return; 
+    if (
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.agreedToTerms
+    ) {
+      return;
     }
 
-    console.log('Registration Data:', formData);
-    navigate('/create-password');
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      console.log('Registration Data:', formData);
+      setIsSubmitting(false);
+      navigate('/create-password');
+    }, 1500);
   };
 
   const handleCancel = () => {
@@ -101,60 +114,49 @@ const RegistrationPage: React.FC = () => {
     <Box
       component="main"
       sx={{
-        // Set fixed desktop height
-        minHeight: { xs: '100vh', lg: '923px' }, 
+        minHeight: { xs: '100vh', lg: '923px' },
         maxWidth: { lg: '1440px' },
         display: 'flex',
         flexDirection: { xs: 'column', lg: 'row' },
-        overflowY: 'auto', 
+        overflowY: 'auto',
       }}
     >
-      {/* LEFT: Blue marketing panel (mobile: top, desktop: left) */}
+      {/* LEFT: Blue marketing panel */}
       <Box
         sx={{
-          // FIXED DESKTOP DIMENSIONS
           width: { xs: '100%', lg: '708px' },
-          height: { xs: '392px', lg: '923px' }, // Match total height
-          
+          height: { xs: '392px', lg: '923px' },
           backgroundColor: '#003473',
           color: '#FFFFFF',
           position: 'relative',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          
-          // Apply specified desktop padding for vertical centering of content
           justifyContent: { xs: 'flex-start', lg: 'center' },
-          pt: { xs: 3, lg: '164px' }, 
+          pt: { xs: 3, lg: '164px' },
           pb: { xs: 4, lg: '164px' },
-          px: { xs: 3, lg: '144px' }, 
-          gap: { lg: '10px' }, 
+          px: { xs: 3, lg: '144px' },
+          gap: { lg: '10px' },
         }}
       >
-        {/* Logo (top-left absolute on desktop) */}
         <Box
           component="img"
           src="/images/logo.png"
           alt="Patterson Dental Logo"
           sx={{
             position: { xs: 'relative', lg: 'absolute' },
-            top: { lg: '33px' }, 
-            left: { lg: '53px' }, 
-            
-            // >>>>>> CORRECTED LOGO DIMENSIONS BASED ON YOUR LATEST SPECS <<<<<<
-            width: { xs: '41px', lg: '113px' }, 
-            height: { xs: '19px', lg: '53px' },   
+            top: { lg: '33px' },
+            left: { lg: '53px' },
+            width: { xs: '41px', lg: '113px' },
+            height: { xs: '19px', lg: '53px' },
             objectFit: 'contain',
-            
-            // Mobile alignment within the blue box
-            alignSelf: {xs: 'flex-start', lg: 'auto'},
+            alignSelf: { xs: 'flex-start', lg: 'auto' },
             mt: { xs: 1, lg: 0 },
             mb: { xs: 2, lg: 0 },
-            // Removed specific mobile left margin as alignSelf and parent padding should handle it
           }}
         />
 
-        {/* Image */}
+        {/* Image - This is what we're aligning to */}
         <Box
           component="img"
           src="/images/dental.png"
@@ -169,7 +171,6 @@ const RegistrationPage: React.FC = () => {
           }}
         />
 
-        {/* Text block */}
         <Box
           sx={{
             textAlign: 'center',
@@ -208,22 +209,24 @@ const RegistrationPage: React.FC = () => {
               lineHeight: 1.5,
             }}
           >
-            Access your account to explore our Comprehensive range of dental equipment and innovative solutions
+            Access your account to explore our Comprehensive range of dental
+            equipment and innovative solutions
           </Typography>
         </Box>
       </Box>
 
-      {/* RIGHT: Form panel (mobile: below, desktop: right) */}
+      {/* RIGHT: Form panel - CHANGED ALIGNMENT */}
       <Box
         sx={{
           flex: 1,
-          minHeight: { xs: 'auto', lg: '923px' }, // Match left height
-          
-          // KEEP SIGNUP BOX IN MIDDLE OF RIGHT SECTION
+          minHeight: { xs: 'auto', lg: '923px' },
           display: 'flex',
-          alignItems: 'center', // Centers vertically
-          justifyContent: 'center', // Centers horizontally
-          
+
+          // REMOVED: alignItems: 'center' - this was centering vertically
+          // ADDED: alignItems: 'flex-start' - starts from top
+          alignItems: { xs: 'center', lg: 'flex-start' },
+          justifyContent: 'center',
+
           backgroundColor: '#FFFFFF',
           pt: { xs: '42px', lg: 0 },
           pb: { xs: '42px', lg: 0 },
@@ -243,9 +246,13 @@ const RegistrationPage: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             gap: 3,
+
+            // ADDED: Top margin to align with image position
+            // Left side: pt: 164px (padding) + some space = image starts around 164px
+            // We want form to align with image, so add top margin
+            mt: { xs: 0, lg: '180px' },
           }}
         >
-          {/* Title */}
           <Typography
             sx={{
               fontFamily: 'Poppins, Roboto, Arial, sans-serif',
@@ -259,124 +266,37 @@ const RegistrationPage: React.FC = () => {
             Signup
           </Typography>
 
-          {/* Form fields - Wrapped in a semantic <form> element */}
-          <Box component="form" onSubmit={handleContinue} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            
-            {/* First Name */}
-            <TextField
-              fullWidth
+          <Box
+            component="form"
+            onSubmit={handleContinue}
+            sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
+          >
+            <CommonInput
               label="First Name"
               value={formData.firstName}
               onChange={handleInputChange('firstName')}
-              variant="outlined"
               required
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '8px',
-                  height: '44px',
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                  '& input': {
-                    padding: '0 14px',
-                    height: '44px',
-                    boxSizing: 'border-box',
-                  },
-                  '& fieldset': {
-                    borderRadius: '8px',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, 12px) scale(1)',
-                  '&.Mui-focused, &.MuiFormLabel-filled': {
-                    transform: 'translate(14px, -9px) scale(0.75)',
-                  },
-                },
-              }}
             />
 
-            {/* Last Name */}
-            <TextField
-              fullWidth
+            <CommonInput
               label="Last Name"
               value={formData.lastName}
               onChange={handleInputChange('lastName')}
-              variant="outlined"
               required
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '8px',
-                  height: '44px',
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                  '& input': {
-                    padding: '0 14px',
-                    height: '44px',
-                    boxSizing: 'border-box',
-                  },
-                  '& fieldset': {
-                    borderRadius: '8px',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, 12px) scale(1)',
-                  '&.Mui-focused, &.MuiFormLabel-filled': {
-                    transform: 'translate(14px, -9px) scale(0.75)',
-                  },
-                },
-              }}
             />
 
-            {/* Email Id */}
-            <TextField
-              fullWidth
+            <CommonInput
               type="email"
               label="Email ID"
               value={formData.email}
               onChange={handleInputChange('email')}
-              variant="outlined"
               required
-              error={!!errors.email}
-              helperText={errors.email}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '8px',
-                  height: '44px',
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0px 1px 2px 0px rgba(10,13,18,0.05)',
-                  '& input': {
-                    padding: '0 14px',
-                    height: '44px',
-                    boxSizing: 'border-box',
-                  },
-                  '& fieldset': {
-                    borderRadius: '8px',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, 12px) scale(1)',
-                  '&.Mui-focused, &.MuiFormLabel-filled': {
-                    transform: 'translate(14px, -9px) scale(0.75)',
-                  },
-                },
-              }}
+              errorMessage={errors.email}
             />
 
-            {/* Terms */}
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.agreedToTerms}
-                  onChange={handleInputChange('agreedToTerms')}
-                  // required
-                  sx={{
-                    color: '#666666',
-                    '&.Mui-checked': {
-                      color: '#7F56D9',
-                    },
-                    mr: 1,
-                  }}
-                />
-              }
+            <CommonCheckbox
+              checked={formData.agreedToTerms}
+              onChange={handleInputChange('agreedToTerms')}
               label={
                 <Typography
                   sx={{
@@ -386,67 +306,48 @@ const RegistrationPage: React.FC = () => {
                     color: '#666666',
                   }}
                 >
-                  By clicking on continue you have confirm that you have read and understood our{' '}
-                  <Link href="#" underline="always" sx={{ color: '#1976d2', fontSize: '12px' }}>
+                  By clicking on continue you have confirm that you have read
+                  and understood our{' '}
+                  <Link
+                    href="#"
+                    underline="always"
+                    sx={{ color: '#1976d2', fontSize: '12px' }}
+                  >
                     Privacy Policies
                   </Link>
                 </Typography>
               }
-              sx={{
-                alignItems: 'flex-start',
-                pl: 0,
+              checkboxProps={{
+                sx: {
+                  mr: 1,  // The margin-right you had
+                }
+              }}
+              labelProps={{
+                sx: {
+                  alignItems: 'flex-start',
+                  pl: 0,
+                }
               }}
             />
 
-            {/* Buttons */}
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <Button
-                variant="outlined"
+              <CommonButton
+                variant="secondary"
                 onClick={handleCancel}
-                sx={{
-                  minWidth: 90,
-                  height: '44px',
-                  borderRadius: '8px',
-                  textTransform: 'none',
-                  fontSize: '1rem',
-                  color: '#666666',
-                  border: '1px solid #D5D7DA',
-                  boxShadow: '0px 1px 2px rgba(10,13,18,0.05)',
-                  flex: 1,
-                }}
+                sx={{ flex: 1 }}
               >
                 Cancel
-              </Button>
+              </CommonButton>
 
-              <Button
+              <CommonButton
                 type="submit"
-                variant="contained"
+                variant="primary"
                 disabled={isContinueDisabled}
-                sx={{
-                  minWidth: 107,
-                  height: '44px',
-                  borderRadius: '8px',
-                  textTransform: 'none',
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  lineHeight: '24px',
-                  letterSpacing: '0%',
-                  color: '#FFFFFF',
-                  backgroundColor: '#7F56D9',
-                  border: '1px solid #7F56D9',
-                  boxShadow: '0px 1px 2px rgba(10,13,18,0.05)',
-                  flex: 1,
-                  '&:hover': { backgroundColor: '#6941C6' },
-                  '&.Mui-disabled': { 
-                    backgroundColor: '#E5E7EB', 
-                    color: '#9CA3AF',
-                    border: '1px solid #E5E7EB',
-                  }
-                }}
+                loading={isSubmitting}
+                sx={{ flex: 1 }}
               >
                 Continue
-              </Button>
+              </CommonButton>
             </Box>
           </Box>
         </Container>
