@@ -9,9 +9,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 // Import our common components
-import CommonInput from '../components/commons/inputs/CommonInput';
-import CommonButton from '../components/commons/buttons/CommonButton';
-import { CommonCheckbox } from '../components/commons';
+import CommonInput from '../components/commons/inputs/PRInput';
+import CommonButton from '../components/commons/buttons/PRButton';
+import { PRCheckbox } from '../components/commons';
 
 
 interface FormData {
@@ -294,7 +294,7 @@ const RegistrationPage: React.FC = () => {
               errorMessage={errors.email}
             />
 
-            <CommonCheckbox
+            <PRCheckbox
               checked={formData.agreedToTerms}
               onChange={handleInputChange('agreedToTerms')}
               label={

@@ -20,8 +20,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 // Import common components
-import CommonInput from '../components/commons/inputs/CommonInput';
-import CommonButton from '../components/commons/buttons/CommonButton';
+import CommonInput from '../components/commons/inputs/PRInput';
+import CommonButton from '../components/commons/buttons/PRButton';
 
 const PattersonAdvantage: React.FC = () => {
   const theme = useTheme();

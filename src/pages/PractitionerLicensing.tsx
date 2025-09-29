@@ -21,12 +21,12 @@ import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 
 // Import common components
-import CommonSelect from '../components/commons/inputs/CommonSelect';
-import CommonDatePicker from '../components/commons/inputs/CommonDatePicker';
-import CommonCheckbox from '../components/commons/inputs/CommonCheckbox';
+import CommonSelect from '../components/commons/inputs/PRSelect';
+import CommonDatePicker from '../components/commons/inputs/PRDatePicker';
+import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
 import type {SelectOption} from '../components/commons/index';
-import CommonInput from '../components/commons/inputs/CommonInput';
-import CommonButton from '../components/commons/buttons/CommonButton';
+import CommonInput from '../components/commons/inputs/PRInput';
+import CommonButton from '../components/commons/buttons/PRButton';
 
 const PractitionerLicensing: React.FC = () => {
   const theme = useTheme();

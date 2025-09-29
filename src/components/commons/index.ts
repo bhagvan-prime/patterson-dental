@@ -1,11 +1,11 @@
 // src/components/common/index.ts
-export { default as CommonInput } from './inputs/CommonInput';
-export { default as CommonSelect } from './inputs/CommonSelect';
-export { default as CommonDatePicker } from './inputs/CommonDatePicker';
-export { default as CommonRadioGroup } from './inputs/CommonRadioGroup';
-export { default as CommonCheckbox } from './inputs/CommonCheckbox';
-export { default as CommonButton } from './buttons/CommonButton';
+export { default as PRInput } from './inputs/PRInput';
+export { default as PRSelect } from './inputs/PRSelect';
+export { default as PRDatePicker } from './inputs/PRDatePicker';
+export { default as PRRadioGroup } from './inputs/PRRadioGroup';
+export { default as PRCheckbox } from './inputs/PRCheckbox';
+export { default as PRButton } from './buttons/PRButton';
 
 // Export the option types so pages can use them
-export type { SelectOption } from './inputs/CommonSelect';
-export type { RadioOption } from './inputs/CommonRadioGroup';
+export type { SelectOption } from './inputs/PRSelect';
+export type { RadioOption } from './inputs/PRRadioGroup';

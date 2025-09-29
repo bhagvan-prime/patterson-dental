@@ -17,10 +17,10 @@ import { useNavigate } from 'react-router-dom';
 
 // Import common components
 import {RadioOption} from '../components/commons/index';
-import CommonRadioGroup from '../components/commons/inputs/CommonRadioGroup';
-import CommonCheckbox from '../components/commons/inputs/CommonCheckbox';
-import CommonInput from '../components/commons/inputs/CommonInput';
-import CommonButton from '../components/commons/buttons/CommonButton';
+import CommonRadioGroup from '../components/commons/inputs/PRRadioGroup';
+import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
+import CommonInput from '../components/commons/inputs/PRInput';
+import CommonButton from '../components/commons/buttons/PRButton';
 
 
 interface TaxExemptFormData {

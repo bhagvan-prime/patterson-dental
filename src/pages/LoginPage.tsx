@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import CommonInput from '../components/commons/inputs/CommonInput';
-import CommonButton from '../components/commons/buttons/CommonButton';
+import CommonInput from '../components/commons/inputs/PRInput';
+import CommonButton from '../components/commons/buttons/PRButton';
 
 interface FormData {
   email: string;

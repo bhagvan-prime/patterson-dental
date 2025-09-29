@@ -16,11 +16,11 @@ import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 
 // Import common components
-import CommonSelect from '../components/commons/inputs/CommonSelect';
-import CommonCheckbox from '../components/commons/inputs/CommonCheckbox';
+import CommonSelect from '../components/commons/inputs/PRSelect';
+import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
 import type {SelectOption} from '../components/commons/index';
-import CommonInput from '../components/commons/inputs/CommonInput';
-import CommonButton from '../components/commons/buttons/CommonButton';
+import CommonInput from '../components/commons/inputs/PRInput';
+import CommonButton from '../components/commons/buttons/PRButton';
 
 const AboutYouAndYourPractice: React.FC = () => {
   const theme = useTheme();
