@@ -1,0 +1,27 @@
+{
+  "header": "Select your tax exemption status",
+  "disclaimer": "Please note this is only applicable for materials that are taxed by federal and state regulations. If a material is not taxed in your state, you will not be taxed and you do not need to set up any exempt certifications.",
+  "exemptionStatus": {
+    "notExempt": "Not exempt from sales tax. I acknowledge that applicable sales tax will be charged on all invoices.",
+    "exempt": "Exempt from Sales Tax."
+  },
+  "fields": {
+    "certificateNumber": "Exemption certificate number"
+  },
+  "checkboxes": {
+    "differentCertificates": "I have different certificate per shipping location",
+    "all": "All",
+    "stateTax": "State Tax",
+    "localTax": "Local Tax",
+    "federalTax": "Federal Tax",
+    "specificMaterials": "Limit exempt from taxes on specific materials",
+    "washingtonState": "Washington state prosthetic exemption"
+  },
+  "taxExemptionHeading": "Please select the taxes you are exempt from",
+  "fileUpload": {
+    "attachButton": "Attach File",
+    "noFileSelected": "No file selected",
+    "requirements": "All applicable exemption certificate files must be attached for your local or state requirements.",
+    "warning": "If your exemption certificate files are not attached or not valid, you will be charged applicable sales tax at a known tax status."
+  }
+}

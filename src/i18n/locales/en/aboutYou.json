@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "practitioner": "Practitioner Information",
+    "practice": "Practice Information",
+    "address": "Practice Address",
+    "onlineUser": "Online User Information"
+  },
+  "fields": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailId": "Email ID",
+    "legalPracticeName": "Legal Practice Name",
+    "typesOfBusiness": "Types of Business",
+    "timeInBusiness": "Time in Business",
+    "speciality": "Speciality",
+    "numberOfLocations": "Number of Locations",
+    "numberOfOperatories": "Number of Operatories",
+    "addressLine1": "Address Line 1",
+    "addressLine2": "Address Line 2",
+    "city": "City",
+    "zipCode": "Zip Code",
+    "locationPhone": "Location Phone Number",
+    "roleAtPractice": "Role at Practice",
+    "email": "Email",
+    "password": "Password"
+  },
+  "address": {
+    "billing": "Billing Address",
+    "shipping": "Shipping Address",
+    "shippingSameAsBilling": "Shipping address is same as billing address",
+    "addAnotherShipping": "Add Another Shipping Address"
+  },
+  "onlineUser": {
+    "sameAsPractitioner": "Same as Practitioner",
+    "stayUpToDate": "I would like to stay up to date on Patterson news",
+    "workingWithSalesRep": "I am working with a Patterson sales rep"
+  },
+  "businessTypes": {
+    "generalPractice": "General Practice",
+    "specialtyPractice": "Specialty Practice",
+    "multiSpecialty": "Multi-Specialty",
+    "hospital": "Hospital"
+  },
+  "timeInBusinessOptions": {
+    "lessThan1": "Less than 1 year",
+    "1to5": "1-5 years",
+    "6to10": "6-10 years",
+    "11to20": "11-20 years",
+    "moreThan20": "More than 20 years"
+  },
+  "specialities": {
+    "generalMedicine": "General Medicine",
+    "cardiology": "Cardiology",
+    "dermatology": "Dermatology",
+    "orthopedics": "Orthopedics",
+    "pediatrics": "Pediatrics",
+    "other": "Other"
+  },
+  "locationOptions": {
+    "1": "1",
+    "2to5": "2-5",
+    "6to10": "6-10",
+    "moreThan10": "More than 10"
+  },
+  "operatoriesOptions": {
+    "1to10": "1-10",
+    "11to50": "11-50",
+    "51to100": "51-100",
+    "moreThan100": "More than 100"
+  },
+  "roles": {
+    "doctor": "Doctor",
+    "nurse": "Nurse",
+    "administrator": "Administrator",
+    "manager": "Manager",
+    "other": "Other"
+  },
+  "buttons": {
+    "nextStep": "Next Step"
+  }
+}

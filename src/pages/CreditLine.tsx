@@ -1,4 +1,4 @@
-// src/pages/CreditLine.tsx - REFACTORED
+// src/pages/CreditLine.tsx - WITH i18n
 import React, { useState } from 'react';
 import {
   Container,
@@ -12,6 +12,7 @@ import {
 } from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import common components
 import CommonSelect from '../components/commons/inputs/PRSelect';
@@ -34,6 +35,7 @@ interface CreditLineFormData {
 
 const CreditLine: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState<CreditLineFormData>({
     wantsCreditLine: '',
@@ -47,22 +49,22 @@ const CreditLine: React.FC = () => {
     electronicSignature: '',
   });
 
-  // Define options
+  // Define options with translations
   const yesNoOptions: RadioOption[] = [
-    { label: 'Yes', value: 'yes' },
-    { label: 'No', value: 'no' },
+    { label: t('creditline:options.yes'), value: 'yes' },
+    { label: t('creditline:options.no'), value: 'no' },
   ];
 
   const accountTypeOptions: RadioOption[] = [
-    { label: 'Checking', value: 'checking' },
-    { label: 'Savings', value: 'savings' },
+    { label: t('creditline:options.checking'), value: 'checking' },
+    { label: t('creditline:options.savings'), value: 'savings' },
   ];
 
   const autopayFrequencyOptions: SelectOption[] = [
-    { label: 'Weekly', value: 'weekly' },
-    { label: 'Bi-Weekly', value: 'bi-weekly' },
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Quarterly', value: 'quarterly' },
+    { label: t('creditline:options.weekly'), value: 'weekly' },
+    { label: t('creditline:options.biWeekly'), value: 'bi-weekly' },
+    { label: t('creditline:options.monthly'), value: 'monthly' },
+    { label: t('creditline:options.quarterly'), value: 'quarterly' },
   ];
 
   const handleInputChange = (field: keyof CreditLineFormData) => (
@@ -94,8 +96,7 @@ const CreditLine: React.FC = () => {
             color: 'text.primary',
           }}
         >
-          I would like to have line of credit account with Patterson that I'll
-          be responsible to pay monthly
+          {t('creditline:mainQuestion')}
         </Typography>
 
         <CommonRadioGroup
@@ -119,11 +120,11 @@ const CreditLine: React.FC = () => {
                 color: 'text.primary',
               }}
             >
-              Tax identification number or social security number
+              {t('creditline:taxIdSection.title')}
             </Typography>
 
             <CommonInput
-              placeholder="TIN/SSN"
+              placeholder={t('creditline:taxIdSection.placeholder')}
               value={formData.tinSSN}
               onChange={handleInputChange('tinSSN')}
               size="small"
@@ -136,13 +137,10 @@ const CreditLine: React.FC = () => {
                 mb: 4,
                 color: 'text.secondary',
                 lineHeight: 1.6,
+                whiteSpace: 'pre-line',
               }}
             >
-              Legal disclaimer here for credit...<br />
-              I authorize and give permissions and my power of attorney to any
-              agent, employee or representative of my business (collectively
-              "Agent"), Whether or not such agents relationship to me...<br />
-              [Additional legal text continues...]
+              {t('creditline:taxIdSection.disclaimer')}
             </Typography>
 
             {/* Auto-pay Section */}
@@ -154,7 +152,7 @@ const CreditLine: React.FC = () => {
                 color: 'text.primary',
               }}
             >
-              I would like to setup automatic payments for my account
+              {t('creditline:autopay.question')}
             </Typography>
 
             <CommonRadioGroup
@@ -177,7 +175,7 @@ const CreditLine: React.FC = () => {
                     fontStyle: 'italic',
                   }}
                 >
-                  Legal language here regarding autopay if selected.
+                  {t('creditline:autopay.legalText')}
                 </Typography>
 
                 {/* Account Type and Bank Details Layout */}
@@ -189,7 +187,7 @@ const CreditLine: React.FC = () => {
                         variant="subtitle1"
                         sx={{ fontWeight: 500, minWidth: 'fit-content' }}
                       >
-                        Account Type
+                        {t('creditline:autopay.accountType')}
                       </Typography>
                       <CommonRadioGroup
                         label=""
@@ -204,7 +202,7 @@ const CreditLine: React.FC = () => {
                   {/* Row 2: All 4 fields in one row */}
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <CommonInput
-                      label="Bank Name"
+                      label={t('creditline:fields.bankName')}
                       value={formData.bankName}
                       onChange={handleInputChange('bankName')}
                       size="small"
@@ -212,7 +210,7 @@ const CreditLine: React.FC = () => {
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <CommonInput
-                      label="Routing Number"
+                      label={t('creditline:fields.routingNumber')}
                       value={formData.routingNumber}
                       onChange={handleInputChange('routingNumber')}
                       size="small"
@@ -220,7 +218,7 @@ const CreditLine: React.FC = () => {
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <CommonInput
-                      label="Account Number"
+                      label={t('creditline:fields.accountNumber')}
                       value={formData.accountNumber}
                       onChange={handleInputChange('accountNumber')}
                       size="small"
@@ -228,7 +226,7 @@ const CreditLine: React.FC = () => {
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                     <CommonSelect
-                      label="Auto-pay Frequency"
+                      label={t('creditline:fields.autopayFrequency')}
                       value={formData.autopayFrequency}
                       onChange={handleInputChange('autopayFrequency')}
                       options={autopayFrequencyOptions}
@@ -242,10 +240,10 @@ const CreditLine: React.FC = () => {
                       variant="subtitle1"
                       sx={{ mb: 1, mt: 2, fontWeight: 500 }}
                     >
-                      Electronic Signature
+                      {t('creditline:autopay.electronicSignature')}
                     </Typography>
                     <CommonInput
-                      placeholder="Electronic Signature"
+                      placeholder={t('creditline:autopay.electronicSignaturePlaceholder')}
                       value={formData.electronicSignature}
                       onChange={handleInputChange('electronicSignature')}
                       size="small"
@@ -278,7 +276,7 @@ const CreditLine: React.FC = () => {
           }}
         >
           <BackIcon sx={{ mr: 0.5 }} />
-          Back
+          {t('common:buttons.back')}
         </CommonButton>
         <CommonButton
           variant="primary"
@@ -290,7 +288,7 @@ const CreditLine: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          Next Step
+          {t('aboutYou:buttons.nextStep')}
           <NextIcon sx={{ ml: 0.5 }} />
         </CommonButton>
       </Box>

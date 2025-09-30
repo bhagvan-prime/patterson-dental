@@ -1,0 +1,31 @@
+{
+  "mainQuestion": "I would like to have line of credit account with Patterson that I'll be responsible to pay monthly",
+  "taxIdSection": {
+    "title": "Tax identification number or social security number",
+    "placeholder": "TIN/SSN",
+    "disclaimer": "Legal disclaimer here for credit...\nI authorize and give permissions and my power of attorney to any agent, employee or representative of my business (collectively \"Agent\"), Whether or not such agents relationship to me...\n[Additional legal text continues...]"
+  },
+  "autopay": {
+    "question": "I would like to setup automatic payments for my account",
+    "legalText": "Legal language here regarding autopay if selected.",
+    "accountType": "Account Type",
+    "electronicSignature": "Electronic Signature",
+    "electronicSignaturePlaceholder": "Electronic Signature"
+  },
+  "fields": {
+    "bankName": "Bank Name",
+    "routingNumber": "Routing Number",
+    "accountNumber": "Account Number",
+    "autopayFrequency": "Auto-pay Frequency"
+  },
+  "options": {
+    "yes": "Yes",
+    "no": "No",
+    "checking": "Checking",
+    "savings": "Savings",
+    "weekly": "Weekly",
+    "biWeekly": "Bi-Weekly",
+    "monthly": "Monthly",
+    "quarterly": "Quarterly"
+  }
+}

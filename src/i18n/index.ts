@@ -6,6 +6,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // Import translation files
 import commonEN from './locales/en/common.json';
 import authEN from './locales/en/auth.json';
+import aboutYouEN from './locales/en/aboutYou.json';
+import creditlineEN from './locales/en/creditline.json';
+import licensingEN from './locales/en/licensing.json';
+import taxexemptEN from './locales/en/taxexempt.json';
+import advantageEN from './locales/en/advantage.json';
+import reviewEN from './locales/en/review.json';
 
 /**
  * i18n Configuration with Namespacing
@@ -13,17 +19,29 @@ import authEN from './locales/en/auth.json';
  * Namespaces:
  * - common: Shared translations (buttons, validation, etc.)
  * - auth: Authentication pages (login, register, create-password)
+ * - aboutYou: About You and Your Practice form
+ * - creditline: Credit Line application page
+ * - licensing: Practitioner Licensing page
+ * - taxexempt: Tax Exempt page
+ * - advantage: Patterson Advantage page
+ * - review: Review and Finalize page
  * 
  * Usage in components:
- * const { t } = useTranslation(['auth', 'common']);
+ * const { t } = useTranslation(['aboutYou', 'common']);
  * <button>{t('common:buttons.save')}</button>
- * <h1>{t('auth:login.title')}</h1>
+ * <h1>{t('aboutYou:sections.practitioner')}</h1>
  */
 
 const resources = {
   en: {
     common: commonEN,
     auth: authEN,
+    aboutYou: aboutYouEN,
+    creditline: creditlineEN,
+    licensing: licensingEN,
+    taxexempt: taxexemptEN,
+    advantage: advantageEN,
+    review: reviewEN,
   },
   // Add more languages here later:
   // es: {
@@ -46,7 +64,7 @@ i18n
     defaultNS: 'common',
     
     // Namespaces to load
-    ns: ['common', 'auth'],
+    ns: ['common', 'auth', 'aboutYou', 'creditline', 'licensing', 'taxexempt', 'advantage', 'review'],
     
     interpolation: {
       escapeValue: false, // React already escapes

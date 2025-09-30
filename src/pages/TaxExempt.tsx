@@ -1,4 +1,4 @@
-// src/pages/TaxExempt.tsx - REFACTORED
+// src/pages/TaxExempt.tsx - WITH i18n
 import React, { useState } from 'react';
 import {
   Container,
@@ -14,6 +14,7 @@ import {
   CloudUpload as UploadIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import common components
 import {RadioOption} from '../components/commons/index';
@@ -21,7 +22,6 @@ import CommonRadioGroup from '../components/commons/inputs/PRRadioGroup';
 import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
-
 
 interface TaxExemptFormData {
   exemptionStatus: string;
@@ -40,6 +40,7 @@ const TaxExempt: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState<TaxExemptFormData>({
     exemptionStatus: '',
@@ -54,15 +55,14 @@ const TaxExempt: React.FC = () => {
     selectedFile: null,
   });
 
-  // Define options
+  // Define options with translations
   const exemptionStatusOptions: RadioOption[] = [
     {
-      label:
-        'Not exempt from sales tax. I acknowledge that applicable sales tax will be charged on all invoices.',
+      label: t('taxexempt:exemptionStatus.notExempt'),
       value: 'not-exempt',
     },
     {
-      label: 'Exempt from Sales Tax.',
+      label: t('taxexempt:exemptionStatus.exempt'),
       value: 'exempt',
     },
   ];
@@ -115,7 +115,7 @@ const TaxExempt: React.FC = () => {
             color: 'text.primary',
           }}
         >
-          Select your tax exemption status
+          {t('taxexempt:header')}
         </Typography>
 
         {/* Disclaimer Text */}
@@ -127,10 +127,7 @@ const TaxExempt: React.FC = () => {
             color: 'text.secondary',
           }}
         >
-          Please note this is only applicable for materials that are taxed by
-          federal and state regulations. If a material is not taxed in your
-          state, you will not be taxed and you do not need to set up any exempt
-          certifications.
+          {t('taxexempt:disclaimer')}
         </Typography>
 
         {/* Tax Exemption Radio Buttons */}
@@ -148,7 +145,7 @@ const TaxExempt: React.FC = () => {
           <Box>
             {/* Certificate Number Input */}
             <CommonInput
-              label="Exemption certificate number"
+              label={t('taxexempt:fields.certificateNumber')}
               value={formData.exemptionCertificateNumber}
               onChange={handleInputChange('exemptionCertificateNumber')}
               size="small"
@@ -159,7 +156,7 @@ const TaxExempt: React.FC = () => {
             <CommonCheckbox
               checked={formData.hasDifferentCertificates}
               onChange={handleInputChange('hasDifferentCertificates')}
-              label="I have different certificate per shipping location"
+              label={t('taxexempt:checkboxes.differentCertificates')}
               labelProps={{ sx: { mb: 4, display: 'block' } }}
             />
 
@@ -172,7 +169,7 @@ const TaxExempt: React.FC = () => {
                 color: 'text.primary',
               }}
             >
-              Please select the taxes you are exempt from
+              {t('taxexempt:taxExemptionHeading')}
             </Typography>
 
             {/* First 5 checkboxes in one line */}
@@ -190,36 +187,39 @@ const TaxExempt: React.FC = () => {
               <CommonCheckbox
                 checked={formData.exemptFromAll}
                 onChange={handleInputChange('exemptFromAll')}
-                label="All"
+                label={t('taxexempt:checkboxes.all')}
               />
               <CommonCheckbox
                 checked={formData.exemptFromStateTax}
                 onChange={handleInputChange('exemptFromStateTax')}
-                label="State Tax"
+                label={t('taxexempt:checkboxes.stateTax')}
               />
               <CommonCheckbox
                 checked={formData.exemptFromLocalTax}
                 onChange={handleInputChange('exemptFromLocalTax')}
-                label="Local Tax"
+                label={t('taxexempt:checkboxes.localTax')}
               />
               <CommonCheckbox
                 checked={formData.exemptFromFederalTax}
                 onChange={handleInputChange('exemptFromFederalTax')}
-                label="Federal Tax"
+                label={t('taxexempt:checkboxes.federalTax')}
               />
               <CommonCheckbox
                 checked={formData.exemptFromSpecificMaterials}
                 onChange={handleInputChange('exemptFromSpecificMaterials')}
-                label="Limit exempt from taxes on specific materials"
+                label={t('taxexempt:checkboxes.specificMaterials')}
               />
             </Box>
 
             {/* 6th checkbox on separate line */}
-            <Box sx={{ mb: 4 }}>
+            <Box sx={{ mb: 4,
+                '& .MuiFormControlLabel-label': {
+                  mt: '10px'
+                } }}>
               <CommonCheckbox
                 checked={formData.washingtonStateExemption}
                 onChange={handleInputChange('washingtonStateExemption')}
-                label="Washington state prosthetic exemption"
+                label={t('taxexempt:checkboxes.washingtonState')}
               />
             </Box>
 
@@ -244,7 +244,7 @@ const TaxExempt: React.FC = () => {
                 }}
               >
                 <UploadIcon sx={{ mr: 0.5 }} />
-                Attach File
+                {t('taxexempt:fileUpload.attachButton')}
                 <input
                   type="file"
                   hidden
@@ -255,7 +255,7 @@ const TaxExempt: React.FC = () => {
 
               <CommonInput
                 value={formData.selectedFile ? formData.selectedFile.name : ''}
-                placeholder="No file selected"
+                placeholder={t('taxexempt:fileUpload.noFileSelected')}
                 size="small"
                 slotProps={{
                   input:{
@@ -278,8 +278,7 @@ const TaxExempt: React.FC = () => {
                 lineHeight: 1.5,
               }}
             >
-              All applicable exemption certificate files must be attached for
-              your local or state requirements.
+              {t('taxexempt:fileUpload.requirements')}
             </Typography>
 
             <Typography
@@ -291,8 +290,7 @@ const TaxExempt: React.FC = () => {
                 fontWeight: 500,
               }}
             >
-              If your exemption certificate files are not attached or not valid,
-              you will be charged applicable sales tax at a known tax status.
+              {t('taxexempt:fileUpload.warning')}
             </Typography>
           </Box>
         )}
@@ -317,7 +315,7 @@ const TaxExempt: React.FC = () => {
           }}
         >
           <BackIcon sx={{ mr: 0.5 }} />
-          Back
+          {t('common:buttons.back')}
         </CommonButton>
         <CommonButton
           variant="primary"
@@ -329,7 +327,7 @@ const TaxExempt: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          Next Step
+          {t('aboutYou:buttons.nextStep')}
           <NextIcon sx={{ ml: 0.5 }} />
         </CommonButton>
       </Box>

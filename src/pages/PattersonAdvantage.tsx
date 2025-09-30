@@ -1,4 +1,4 @@
-// src/pages/PattersonAdvantage.tsx - REFACTORED
+// src/pages/PattersonAdvantage.tsx - WITH i18n
 import React, { useState } from 'react';
 import {
   Container,
@@ -18,6 +18,7 @@ import {
   AttachMoney as DollarIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import common components
 import CommonInput from '../components/commons/inputs/PRInput';
@@ -27,6 +28,7 @@ const PattersonAdvantage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [enrollmentData, setEnrollmentData] = useState({
@@ -78,7 +80,7 @@ const PattersonAdvantage: React.FC = () => {
             textAlign: 'left',
           }}
         >
-          Get rewards for your purchases
+          {t('advantage:header')}
         </Typography>
 
         {/* Description Text */}
@@ -91,12 +93,7 @@ const PattersonAdvantage: React.FC = () => {
             color: 'text.secondary',
           }}
         >
-          As a valued customer, you save money with exclusive promotions, earn
-          rewards for your purchases, receive priority scheduling for service
-          and support plus much more. The Patterson Advantage Loyalty Reward
-          program is built around one core idea - making it easier and more
-          affordable for you to invest in practice Growth. See how purchases you
-          make with Patterson can help bring your practice vision to life.
+          {t('advantage:description')}
         </Typography>
 
         {/* Logo Section */}
@@ -254,7 +251,7 @@ const PattersonAdvantage: React.FC = () => {
                 mb: 0.5,
               }}
             >
-              Advantage
+              {t('advantage:logo.advantage')}
             </Typography>
             <Typography
               variant="h6"
@@ -262,7 +259,7 @@ const PattersonAdvantage: React.FC = () => {
                 color: '#1976d2',
               }}
             >
-              Patterson Rewards
+              {t('advantage:logo.pattersonRewards')}
             </Typography>
           </Box>
         </Box>
@@ -277,7 +274,7 @@ const PattersonAdvantage: React.FC = () => {
             textAlign: 'center',
           }}
         >
-          How It Works
+          {t('advantage:howItWorks')}
         </Typography>
 
         {/* Three Step Process */}
@@ -310,7 +307,7 @@ const PattersonAdvantage: React.FC = () => {
                 color: '#1976d2',
               }}
             >
-              Purchase
+              {t('advantage:steps.purchase.title')}
             </Typography>
             <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
               <ComputerIcon sx={{ fontSize: 60, color: '#1565c0' }} />
@@ -322,10 +319,9 @@ const PattersonAdvantage: React.FC = () => {
                 lineHeight: 1.5,
               }}
             >
-              Make purchases through our platform and automatically start earning
-              points with every transaction.{' '}
+              {t('advantage:steps.purchase.description')}{' '}
               <Box component="span" sx={{ color: '#1976d2', fontWeight: 500 }}>
-                Every dollar counts towards your rewards.
+                {t('advantage:steps.purchase.highlight')}
               </Box>
             </Typography>
           </Box>
@@ -350,7 +346,7 @@ const PattersonAdvantage: React.FC = () => {
                 color: '#1976d2',
               }}
             >
-              Earn
+              {t('advantage:steps.earn.title')}
             </Typography>
             <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
               <PiggyBankIcon sx={{ fontSize: 60, color: '#1565c0' }} />
@@ -362,11 +358,11 @@ const PattersonAdvantage: React.FC = () => {
                 lineHeight: 1.5,
               }}
             >
-              Accumulate points and unlock exclusive benefits.{' '}
+              {t('advantage:steps.earn.description')}{' '}
               <Box component="span" sx={{ color: '#1976d2', fontWeight: 500 }}>
-                Watch your savings grow with each purchase
+                {t('advantage:steps.earn.highlight')}
               </Box>{' '}
-              and gain access to special promotions.
+              {t('advantage:steps.earn.suffix')}
             </Typography>
           </Box>
 
@@ -390,7 +386,7 @@ const PattersonAdvantage: React.FC = () => {
                 color: '#1976d2',
               }}
             >
-              Redeem & Repeat
+              {t('advantage:steps.redeem.title')}
             </Typography>
             <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
               <Box
@@ -415,10 +411,9 @@ const PattersonAdvantage: React.FC = () => {
                 lineHeight: 1.5,
               }}
             >
-              Use your earned points for discounts, free products, or priority
-              services.{' '}
+              {t('advantage:steps.redeem.description')}{' '}
               <Box component="span" sx={{ color: '#1976d2', fontWeight: 500 }}>
-                The cycle continues with every new purchase.
+                {t('advantage:steps.redeem.highlight')}
               </Box>
             </Typography>
           </Box>
@@ -442,7 +437,7 @@ const PattersonAdvantage: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            Enroll Now
+            {t('advantage:enrollButton')}
           </CommonButton>
         </Box>
 
@@ -478,18 +473,18 @@ const PattersonAdvantage: React.FC = () => {
                 textAlign: 'center',
               }}
             >
-              Enroll in Patterson Advantage
+              {t('advantage:modal.title')}
             </Typography>
 
             <Box sx={{ mb: 3 }}>
               <CommonInput
-                label="Full Name"
+                label={t('advantage:modal.fields.fullName')}
                 value={enrollmentData.name}
                 onChange={handleInputChange('name')}
                 sx={{ mb: 2 }}
               />
               <CommonInput
-                label="Email Address"
+                label={t('advantage:modal.fields.email')}
                 type="email"
                 value={enrollmentData.email}
                 onChange={handleInputChange('email')}
@@ -511,7 +506,7 @@ const PattersonAdvantage: React.FC = () => {
                   py: 1,
                 }}
               >
-                Cancel
+                {t('common:buttons.cancel')}
               </CommonButton>
               <CommonButton
                 variant="primary"
@@ -521,7 +516,7 @@ const PattersonAdvantage: React.FC = () => {
                   py: 1,
                 }}
               >
-                Enroll
+                {t('advantage:modal.buttons.enroll')}
               </CommonButton>
             </Box>
           </Box>
@@ -547,7 +542,7 @@ const PattersonAdvantage: React.FC = () => {
           }}
         >
           <BackIcon sx={{ mr: 0.5 }} />
-          Back
+          {t('common:buttons.back')}
         </CommonButton>
         <CommonButton
           variant="primary"
@@ -559,7 +554,7 @@ const PattersonAdvantage: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          Next Step
+          {t('aboutYou:buttons.nextStep')}
           <NextIcon sx={{ ml: 0.5 }} />
         </CommonButton>
       </Box>

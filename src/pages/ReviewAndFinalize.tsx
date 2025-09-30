@@ -1,4 +1,4 @@
-// src/pages/ReviewAndFinalize.tsx - REFACTORED
+// src/pages/ReviewAndFinalize.tsx - WITH i18n
 import React, { useState } from 'react';
 import {
   Container,
@@ -20,6 +20,7 @@ import {
 } from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import common components
 import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
@@ -51,6 +52,7 @@ const ReviewAndFinalize: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [expanded, setExpanded] = useState<string | false>('step1');
   const [formData] = useState<AllFormData>(mockFetchAllData());
@@ -61,14 +63,30 @@ const ReviewAndFinalize: React.FC = () => {
 
   const steps = [
     {
-      label: '1. About You and your Practice',
+      label: t('review:steps.step1'),
       stepKey: 'step1',
       path: '/step1',
     },
-    { label: '2. Practitioner Licensing', stepKey: 'step2', path: '/step2' },
-    { label: '3. Credit Account', stepKey: 'step3', path: '/step3' },
-    { label: '4. Patterson Advantage', stepKey: 'step5', path: '/step5' },
-    { label: '5. Tax Exemption Status', stepKey: 'step6', path: '/step6' },
+    { 
+      label: t('review:steps.step2'), 
+      stepKey: 'step2', 
+      path: '/step2' 
+    },
+    { 
+      label: t('review:steps.step3'), 
+      stepKey: 'step3', 
+      path: '/step3' 
+    },
+    { 
+      label: t('review:steps.step5'), 
+      stepKey: 'step5', 
+      path: '/step5' 
+    },
+    { 
+      label: t('review:steps.step6'), 
+      stepKey: 'step6', 
+      path: '/step6' 
+    },
   ];
 
   const handleAccordionChange =
@@ -98,7 +116,9 @@ const ReviewAndFinalize: React.FC = () => {
               {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              {typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value}
+              {typeof value === 'boolean' 
+                ? (value ? t('review:fieldLabels.yes') : t('review:fieldLabels.no')) 
+                : value}
             </Typography>
           </Grid>
         ))}
@@ -111,7 +131,7 @@ const ReviewAndFinalize: React.FC = () => {
       <Paper elevation={1} sx={{ p: { xs: 1.5, md: 2 }, borderRadius: 2 }}>
         <Box sx={{ width: '100%' }}>
           <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-            Review and Finalize Application
+            {t('review:header')}
           </Typography>
 
           {steps.map((step, index) => (
@@ -128,11 +148,11 @@ const ReviewAndFinalize: React.FC = () => {
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 sx={{
-                  backgroundColor: 'grey.100',
-                  color: 'text.primary',
+                  backgroundColor: index % 2 === 0 ? 'primary.light' : 'primary.main',
+                  color: 'primary.contrastText',
                   minHeight: 48,
                   '&.Mui-expanded': {
-                    backgroundColor: 'primary.light',
+                    backgroundColor: index % 2 === 0 ? 'primary.main' : 'primary.dark',
                     minHeight: 48,
                   },
                   '& .MuiAccordionSummary-content': { margin: '8px 0' },
@@ -156,10 +176,20 @@ const ReviewAndFinalize: React.FC = () => {
                       e.stopPropagation();
                       navigate(step.path);
                     }}
-                    sx={{ ml: 2 }}
+                    sx={{ 
+                      ml: 2,
+                      color: 'white',
+                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                      },
+                      '& .MuiSvgIcon-root': {
+                        color: 'white',
+                      }
+                    }}
                   >
                     <EditIcon sx={{ mr: 0.5, fontSize: 18 }} />
-                    Edit
+                    {/* {t('review:buttons.edit')} */}
                   </CommonButton>
                 </Box>
               </AccordionSummary>
@@ -180,22 +210,17 @@ const ReviewAndFinalize: React.FC = () => {
             }}
           >
             <Typography variant="h6" color="warning.dark" gutterBottom>
-              Final Submission Declaration
+              {t('review:declaration.title')}
             </Typography>
             <Typography variant="body2" color="text.secondary" gutterBottom>
-              I, the authorized representative, certify that all information
-              provided across all steps of this customer boarding process is
-              accurate and complete to the best of my knowledge. I understand
-              that submitting this application constitutes a formal request for
-              business partnership and acceptance of all applicable terms and
-              conditions.
+              {t('review:declaration.text')}
             </Typography>
             <CommonCheckbox
               checked={finalConsent}
               onChange={(e) => setFinalConsent(e.target.checked)}
               label={
                 <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                  I agree to the final declaration and authorize submission.
+                  {t('review:declaration.consent')}
                 </Typography>
               }
               checkboxProps={{ size: 'small', color: 'success' }}
@@ -210,10 +235,10 @@ const ReviewAndFinalize: React.FC = () => {
             {/* Electronic Signature Field */}
             <Box sx={{ mb: 2 }}>
               <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 500 }}>
-                Electronic Signature
+                {t('review:declaration.electronicSignature')}
               </Typography>
               <CommonInput
-                placeholder="Electronic Signature"
+                placeholder={t('review:declaration.electronicSignaturePlaceholder')}
                 value={electronicSignature}
                 onChange={(e) => setElectronicSignature(e.target.value)}
                 size="small"
@@ -257,7 +282,7 @@ const ReviewAndFinalize: React.FC = () => {
                   fontSize: { xs: '2.5rem', md: '3.5rem' },
                 }}
               >
-                Thank You!
+                {t('review:successModal.title')}
               </Typography>
 
               <Typography
@@ -268,7 +293,7 @@ const ReviewAndFinalize: React.FC = () => {
                   lineHeight: 1.6,
                 }}
               >
-                Application has been sent for Processing.
+                {t('review:successModal.message')}
               </Typography>
             </Box>
           </Modal>
@@ -294,7 +319,7 @@ const ReviewAndFinalize: React.FC = () => {
           }}
         >
           <BackIcon sx={{ mr: 0.5 }} />
-          Back
+          {t('common:buttons.back')}
         </CommonButton>
 
         <CommonButton
@@ -309,7 +334,7 @@ const ReviewAndFinalize: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          Submit
+          {t('review:buttons.submit')}
         </CommonButton>
       </Box>
     </Container>

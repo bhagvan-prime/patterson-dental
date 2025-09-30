@@ -1,0 +1,38 @@
+{
+  "header": "Get rewards for your purchases",
+  "description": "As a valued customer, you save money with exclusive promotions, earn rewards for your purchases, receive priority scheduling for service and support plus much more. The Patterson Advantage Loyalty Reward program is built around one core idea - making it easier and more affordable for you to invest in practice Growth. See how purchases you make with Patterson can help bring your practice vision to life.",
+  "logo": {
+    "advantage": "Advantage",
+    "pattersonRewards": "Patterson Rewards"
+  },
+  "howItWorks": "How It Works",
+  "steps": {
+    "purchase": {
+      "title": "Purchase",
+      "description": "Make purchases through our platform and automatically start earning points with every transaction.",
+      "highlight": "Every dollar counts towards your rewards."
+    },
+    "earn": {
+      "title": "Earn",
+      "description": "Accumulate points and unlock exclusive benefits.",
+      "highlight": "Watch your savings grow with each purchase",
+      "suffix": "and gain access to special promotions."
+    },
+    "redeem": {
+      "title": "Redeem & Repeat",
+      "description": "Use your earned points for discounts, free products, or priority services.",
+      "highlight": "The cycle continues with every new purchase."
+    }
+  },
+  "enrollButton": "Enroll Now",
+  "modal": {
+    "title": "Enroll in Patterson Advantage",
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email Address"
+    },
+    "buttons": {
+      "enroll": "Enroll"
+    }
+  }
+}

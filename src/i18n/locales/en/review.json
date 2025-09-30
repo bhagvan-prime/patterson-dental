@@ -1,0 +1,29 @@
+{
+  "header": "Review and Finalize Application",
+  "steps": {
+    "step1": "1. About You and your Practice",
+    "step2": "2. Practitioner Licensing",
+    "step3": "3. Credit Account",
+    "step5": "4. Patterson Advantage",
+    "step6": "5. Tax Exemption Status"
+  },
+  "buttons": {
+    "edit": "Edit",
+    "submit": "Submit"
+  },
+  "declaration": {
+    "title": "Final Submission Declaration",
+    "text": "I, the authorized representative, certify that all information provided across all steps of this customer boarding process is accurate and complete to the best of my knowledge. I understand that submitting this application constitutes a formal request for business partnership and acceptance of all applicable terms and conditions.",
+    "consent": "I agree to the final declaration and authorize submission.",
+    "electronicSignature": "Electronic Signature",
+    "electronicSignaturePlaceholder": "Electronic Signature"
+  },
+  "successModal": {
+    "title": "Thank You!",
+    "message": "Application has been sent for Processing."
+  },
+  "fieldLabels": {
+    "yes": "Yes",
+    "no": "No"
+  }
+}

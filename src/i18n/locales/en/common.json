@@ -1,8 +1,8 @@
 {
   "buttons": {
     "save": "Save",
-    "cancel": "Cancel",
-    "continue": "Continue",
+    "cancel": "cancel",
+    "continue": "continue",
     "back": "Back",
     "reset": "Reset",
     "submit": "Submit",

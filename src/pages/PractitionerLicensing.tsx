@@ -1,4 +1,4 @@
-// src/pages/PractitionerLicensing.tsx - REFACTORED
+// src/pages/PractitionerLicensing.tsx - WITH i18n
 import React, { useState } from 'react';
 import {
   Container,
@@ -15,10 +15,10 @@ import {
   ExpandMore as ExpandMoreIcon,
   NavigateNext as NextIcon,
   NavigateBefore as BackIcon,
-  
 } from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import common components
 import CommonSelect from '../components/commons/inputs/PRSelect';
@@ -32,6 +32,7 @@ const PractitionerLicensing: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [expanded, setExpanded] = useState<string | false>('panel1');
   const [editMode, setEditMode] = useState({
@@ -49,12 +50,12 @@ const PractitionerLicensing: React.FC = () => {
     understandValidationRequirements: false,
   });
 
-  // Define address options
+  // Define address options with translations
   const addressOptions: SelectOption[] = [
-    { label: '123 Main St, City, State 12345', value: 'address1' },
-    { label: '456 Oak Ave, City, State 67890', value: 'address2' },
-    { label: '789 Pine Rd, City, State 54321', value: 'address3' },
-    { label: 'Other Address', value: 'other' },
+    { label: t('licensing:addressOptions.address1'), value: 'address1' },
+    { label: t('licensing:addressOptions.address2'), value: 'address2' },
+    { label: t('licensing:addressOptions.address3'), value: 'address3' },
+    { label: t('licensing:addressOptions.other'), value: 'other' },
   ];
 
   const handleAccordionChange =
@@ -113,8 +114,7 @@ const PractitionerLicensing: React.FC = () => {
             textAlign: 'left',
           }}
         >
-          Please provide your practitioner license to be added to your account
-          to enable ordering of prescription and other regulated materials
+          {t('licensing:header')}
         </Typography>
 
         <Box sx={{ width: '100%' }}>
@@ -148,16 +148,15 @@ const PractitionerLicensing: React.FC = () => {
                 }}
               >
                 <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                  Practitioner Licensing
+                  {t('licensing:sections.practitioner')}
                 </Typography>
-                
               </Box>
             </AccordionSummary>
             <AccordionDetails sx={{ p: 1.5 }}>
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                   <CommonInput
-                    label="Name as appears on license"
+                    label={t('licensing:fields.nameOnLicense')}
                     value={formData.nameOnLicense}
                     onChange={handleInputChange('nameOnLicense')}
                     disabled={!editMode.panel1}
@@ -166,7 +165,7 @@ const PractitionerLicensing: React.FC = () => {
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                   <CommonInput
-                    label="License Number"
+                    label={t('licensing:fields.licenseNumber')}
                     value={formData.licenseNumber}
                     onChange={handleInputChange('licenseNumber')}
                     disabled={!editMode.panel1}
@@ -175,7 +174,7 @@ const PractitionerLicensing: React.FC = () => {
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                   <CommonDatePicker
-                    label="License Expiration Date"
+                    label={t('licensing:fields.licenseExpirationDate')}
                     value={formData.licenseExpirationDate}
                     onChange={handleInputChange('licenseExpirationDate')}
                     disabled={!editMode.panel1}
@@ -184,7 +183,7 @@ const PractitionerLicensing: React.FC = () => {
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 6 }}>
                   <CommonSelect
-                    label="Select address license applies to"
+                    label={t('licensing:fields.selectAddress')}
                     value={formData.selectedAddress}
                     onChange={handleInputChange('selectedAddress')}
                     options={addressOptions}
@@ -197,7 +196,7 @@ const PractitionerLicensing: React.FC = () => {
                     checked={formData.hasAdditionalLicensing}
                     onChange={handleInputChange('hasAdditionalLicensing')}
                     disabled={!editMode.panel1}
-                    label="I have additional licensing I would like to add my account"
+                    label={t('licensing:checkboxes.additionalLicensing')}
                     checkboxProps={{ size: 'small' }}
                     labelProps={{
                       sx: {
@@ -225,14 +224,14 @@ const PractitionerLicensing: React.FC = () => {
                   disabled={!editMode.panel1}
                   sx={{ minWidth: 100 }}
                 >
-                  Cancel
+                  {t('common:buttons.cancel')}
                 </CommonButton>
                 <CommonButton
                   variant="primary"
                   onClick={() => handleNext('practitioner-licensing')}
                   sx={{ minWidth: 100 }}
                 >
-                  Save
+                  {t('common:buttons.save')}
                 </CommonButton>
               </Box>
             </AccordionDetails>
@@ -268,16 +267,15 @@ const PractitionerLicensing: React.FC = () => {
                 }}
               >
                 <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                  TDDDD
+                  {t('licensing:sections.tdddd')}
                 </Typography>
-                
               </Box>
             </AccordionSummary>
             <AccordionDetails sx={{ p: 1.5 }}>
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, md: 6 }}>
                   <CommonInput
-                    label="Based on shipping address"
+                    label={t('licensing:fields.basedOnShippingAddress')}
                     value={formData.basedOnShippingAddress}
                     onChange={handleInputChange('basedOnShippingAddress')}
                     disabled={!editMode.panel2}
@@ -286,7 +284,7 @@ const PractitionerLicensing: React.FC = () => {
                 </Grid>
                 <Grid size={{ xs: 12, md: 6 }}>
                   <CommonDatePicker
-                    label="TDD license expiration"
+                    label={t('licensing:fields.tddLicenseExpiration')}
                     value={formData.tddLicenseExpiration}
                     onChange={handleInputChange('tddLicenseExpiration')}
                     disabled={!editMode.panel2}
@@ -310,7 +308,7 @@ const PractitionerLicensing: React.FC = () => {
                   disabled={!editMode.panel2}
                   sx={{ minWidth: 100 }}
                 >
-                  Save
+                  {t('common:buttons.save')}
                 </CommonButton>
               </Box>
             </AccordionDetails>
@@ -327,9 +325,7 @@ const PractitionerLicensing: React.FC = () => {
             textAlign: 'left',
           }}
         >
-          Validation of licensing information will take up to 1-2 business days.
-          Ordering of prescription or other regulated materials will not be
-          allowed until validation is complete.
+          {t('licensing:footer')}
         </Typography>
 
         {/* Validation Requirements Checkbox */}
@@ -337,7 +333,7 @@ const PractitionerLicensing: React.FC = () => {
           <CommonCheckbox
             checked={formData.understandValidationRequirements}
             onChange={handleInputChange('understandValidationRequirements')}
-            label="I understand the validation requirements prior to ordering regulated materials"
+            label={t('licensing:checkboxes.understandValidation')}
             checkboxProps={{ size: 'small' }}
             labelProps={{
               sx: {
@@ -367,7 +363,7 @@ const PractitionerLicensing: React.FC = () => {
           }}
         >
           <BackIcon sx={{ mr: 0.5 }} />
-          Back
+          {t('common:buttons.back')}
         </CommonButton>
         <CommonButton
           variant="primary"
@@ -379,7 +375,7 @@ const PractitionerLicensing: React.FC = () => {
             fontWeight: 600,
           }}
         >
-          Next Step
+          {t('aboutYou:buttons.nextStep')}
           <NextIcon sx={{ ml: 0.5 }} />
         </CommonButton>
       </Box>

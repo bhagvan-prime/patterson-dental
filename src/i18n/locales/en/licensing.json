@@ -1,0 +1,26 @@
+{
+  "header": "Please provide your practitioner license to be added to your account to enable ordering of prescription and other regulated materials",
+  "footer": "Validation of licensing information will take up to 1-2 business days. Ordering of prescription or other regulated materials will not be allowed until validation is complete.",
+  "sections": {
+    "practitioner": "Practitioner Licensing",
+    "tdddd": "TDDDD"
+  },
+  "fields": {
+    "nameOnLicense": "Name as appears on license",
+    "licenseNumber": "License Number",
+    "licenseExpirationDate": "License Expiration Date",
+    "selectAddress": "Select address license applies to",
+    "basedOnShippingAddress": "Based on shipping address",
+    "tddLicenseExpiration": "TDD license expiration"
+  },
+  "checkboxes": {
+    "additionalLicensing": "I have additional licensing I would like to add my account",
+    "understandValidation": "I understand the validation requirements prior to ordering regulated materials"
+  },
+  "addressOptions": {
+    "address1": "123 Main St, City, State 12345",
+    "address2": "456 Oak Ave, City, State 67890",
+    "address3": "789 Pine Rd, City, State 54321",
+    "other": "Other Address"
+  }
+}
