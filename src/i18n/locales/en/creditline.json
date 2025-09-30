@@ -3,7 +3,7 @@
   "taxIdSection": {
     "title": "Tax identification number or social security number",
     "placeholder": "TIN/SSN",
-    "disclaimer": "Legal disclaimer here for credit...\nI authorize and give permissions and my power of attorney to any agent, employee or representative of my business (collectively \"Agent\"), Whether or not such agents relationship to me...\n[Additional legal text continues...]"
+    "disclaimer": "Legal disclaimer here for credit...\nI authorize and give permissions and my power of attorney to any agent, employee or representative of my business (collectively \"Agent\"), Whether or not such agents relationship to me..."
   },
   "autopay": {
     "question": "I would like to setup automatic payments for my account",

@@ -10,9 +10,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-// Redux
-// import { useRegisterMutation } from '../services/api';
-
 // Common components
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
@@ -110,17 +107,6 @@ const RegistrationPage: React.FC = () => {
         navigate('/create-password');
       }, 1000);
     }, 500);
-  };
-
-  const handleCancel = () => {
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      agreedToTerms: false,
-    });
-    setErrors({ email: '' });
-    setSuccessMessage('');
   };
 
   const isContinueDisabled =

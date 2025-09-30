@@ -44,7 +44,13 @@
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "format": "prettier --write src/**/*.{ts,tsx,css,md}",
     "type-check": "tsc --noEmit",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "check:console": "findstr /s /n /i \"console\\.\" src\\*.ts src\\*.tsx src\\*.js src\\*.jsx || echo No console found",
+    "check:debugger": "findstr /s /n /i \"debugger\" src\\*.ts src\\*.tsx src\\*.js src\\*.jsx || echo No debugger found",
+    "check:todos": "findstr /s /n /i \"TODO FIXME\" src\\*.ts src\\*.tsx src\\*.js src\\*.jsx || echo No TODOs found",
+    "check:types": "tsc --noEmit",
+    "check:all": "npm run check:types && npm run lint && npm audit --audit-level=high",
+    "deploy-ready": "npm run check:all && npm run build"
   },
   "eslintConfig": {
     "extends": [

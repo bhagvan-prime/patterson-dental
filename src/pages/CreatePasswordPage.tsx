@@ -44,16 +44,6 @@ const CreatePasswordPage: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
-  
-  // Get email from registration
-  // const registrationEmail = localStorage.getItem('registration_email');
-
-  // Redirect if no email found
-  // useEffect(() => {
-  //   if (!registrationEmail) {
-  //     navigate('/');
-  //   }
-  // }, [registrationEmail, navigate]);
 
   // FIXED PASSWORD VALIDATION
   const validatePassword = (password: string): string => {
@@ -75,7 +65,7 @@ const CreatePasswordPage: React.FC = () => {
     }
     
     // Check for digit
-    if (!/[0-9]/.test(password)) {
+    if (!/\d/.test(password)) {
       return 'Password must contain at least one number.';
     }
     
@@ -148,10 +138,6 @@ const CreatePasswordPage: React.FC = () => {
         navigate('/login');
       }, 1500);
     }, 500);
-  };
-
-  const handleBack = () => {
-    navigate(-1);
   };
 
   const isSaveDisabled =

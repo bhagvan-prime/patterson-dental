@@ -148,11 +148,11 @@ const ReviewAndFinalize: React.FC = () => {
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 sx={{
-                  backgroundColor: index % 2 === 0 ? 'primary.light' : 'primary.main',
+                  backgroundColor: 'primary.main',
                   color: 'primary.contrastText',
                   minHeight: 48,
                   '&.Mui-expanded': {
-                    backgroundColor: index % 2 === 0 ? 'primary.main' : 'primary.dark',
+                    backgroundColor: 'primary.dark',
                     minHeight: 48,
                   },
                   '& .MuiAccordionSummary-content': { margin: '8px 0' },

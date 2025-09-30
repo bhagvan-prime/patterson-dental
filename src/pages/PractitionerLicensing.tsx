@@ -127,7 +127,7 @@ const PractitionerLicensing: React.FC = () => {
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               sx={{
-                backgroundColor: 'primary.light',
+                backgroundColor: 'primary.main',
                 color: 'primary.contrastText',
                 minHeight: 48,
                 '&.Mui-expanded': {

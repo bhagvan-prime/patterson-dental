@@ -27,8 +27,8 @@
   "address": {
     "billing": "Billing Address",
     "shipping": "Shipping Address",
-    "shippingSameAsBilling": "Shipping address is same as billing address",
-    "addAnotherShipping": "Add Another Shipping Address"
+    "shippingSameAsBilling": "Shipping Address is same as Billing Address",
+    "addAnotherShipping": "Add another Shipping Address"
   },
   "onlineUser": {
     "sameAsPractitioner": "Same as Practitioner",

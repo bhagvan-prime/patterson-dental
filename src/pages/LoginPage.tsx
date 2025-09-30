@@ -120,12 +120,6 @@ const LoginPage: React.FC = () => {
     }, 500);
   };
 
-  const handleReset = () => {
-    setFormData({ email: '', password: '', agreedToPrivacy: false });
-    setErrors({ email: '', password: '' });
-    setSuccessMessage('');
-  };
-
   const isLoginDisabled =
     !formData.email.trim() ||
     !formData.password.trim() ||

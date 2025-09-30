@@ -26,16 +26,6 @@ interface StepStatus {
   current: boolean;
 }
 
-const StepperTabs: React.FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const theme = useTheme();
-  const { t } = useTranslation();
-
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   const steps = [
     { 
       path: '/step1', 
@@ -68,6 +58,16 @@ const StepperTabs: React.FC = () => {
       translationKey: 'review'
     }
   ];
+
+const StepperTabs: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const theme = useTheme();
+  const { t } = useTranslation();
+
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [value, setValue] = useState(0);
   const [stepStatuses, setStepStatuses] = useState<StepStatus[]>([
