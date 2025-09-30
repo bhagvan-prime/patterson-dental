@@ -1,0 +1,37 @@
+{
+  "header": "Customer Onboarding",
+  "setupAccount": "Setup your account",
+  "subtitle": "Please provide your professional information to get started with Patterson service",
+  "steps": {
+    "aboutYou": {
+      "line1": "About You and",
+      "line2": "Your Practice",
+      "short": "About You"
+    },
+    "licensing": {
+      "line1": "Practice",
+      "line2": "Licensing",
+      "short": "Licensing"
+    },
+    "credit": {
+      "line1": "Credit",
+      "line2": "Account",
+      "short": "Credit"
+    },
+    "advantage": {
+      "line1": "Patterson",
+      "line2": "Advantage",
+      "short": "Advantage"
+    },
+    "taxExempt": {
+      "line1": "Tax Exemption",
+      "line2": "Status",
+      "short": "Tax Exempt"
+    },
+    "review": {
+      "line1": "Review and",
+      "line2": "Submit",
+      "short": "Review"
+    }
+  }
+}

@@ -156,6 +156,9 @@ const ReviewAndFinalize: React.FC = () => {
                     minHeight: 48,
                   },
                   '& .MuiAccordionSummary-content': { margin: '8px 0' },
+                  '& .MuiAccordionSummary-expandIconWrapper': {
+                  color: 'white',
+                },
                 }}
               >
                 <Box

@@ -176,7 +176,7 @@ const CreatePasswordPage: React.FC = () => {
         sx={{
           width: { xs: '100%', lg: '708px' },
           height: { xs: '392px', lg: '923px' },
-          backgroundColor: '#003473',
+          backgroundColor: '#1849A9',
           color: '#FFFFFF',
           position: 'relative',
           display: 'flex',
@@ -223,17 +223,18 @@ const CreatePasswordPage: React.FC = () => {
         <Box
           sx={{
             textAlign: 'center',
-            px: { xs: 2, lg: 4 },
-            maxWidth: { xs: 280, lg: '480px' },
+            px: { xs: '16px', lg: 0 },
+            maxWidth: { xs: '100%', lg: '420px' },
+            mx: 'auto',
           }}
         >
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 700,
-              fontSize: { xs: '24px', lg: '2.5rem' },
-              lineHeight: 1.1,
-              mb: { xs: 0.5, lg: 1 },
+              fontSize: { xs: '20px', lg: '40px' },
+              lineHeight: { xs: '24px', lg: '40px' },
+              mb: { xs: '16px', lg: '24px' },
             }}
           >
             {t('common:branding.companyName')}
@@ -241,10 +242,11 @@ const CreatePasswordPage: React.FC = () => {
 
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 400,
-              fontSize: { xs: '16px', lg: '1.25rem' },
-              mb: { xs: 1, lg: 1.5 },
+              fontSize: { xs: '14px', lg: '24px' },
+              lineHeight: { xs: '18px', lg: '24px' },
+              mb: { xs: '12px', lg: '24px' },
             }}
           >
             {t('common:branding.tagline')}
@@ -252,10 +254,10 @@ const CreatePasswordPage: React.FC = () => {
 
           <Typography
             sx={{
-              fontFamily: 'Inter, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 400,
-              fontSize: { xs: '12px', lg: '1rem' },
-              lineHeight: 1.5,
+              fontSize: { xs: '12px', lg: '16px' },
+              lineHeight: { xs: '18px', lg: '26px' },
             }}
           >
             {t('common:branding.description')}
@@ -398,14 +400,6 @@ const CreatePasswordPage: React.FC = () => {
             </Box>
 
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <CommonButton
-                variant="secondary"
-                onClick={handleBack}
-                sx={{ flex: 1 }}
-                disabled={isSubmitting}
-              >
-                {t('common:buttons.back')}
-              </CommonButton>
 
               <CommonButton
                 type="submit"
@@ -414,7 +408,7 @@ const CreatePasswordPage: React.FC = () => {
                 loading={isSubmitting}
                 sx={{ flex: 1 }}
               >
-                {t('common:buttons.save')}
+                {t('common:buttons.savePassword')}
               </CommonButton>
             </Box>
           </Box>

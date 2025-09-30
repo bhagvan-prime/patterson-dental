@@ -17,27 +17,48 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
-      light: '#42a5f5',
-      dark: '#1565c0',
+      main: '#003473',      // Patterson blue
+      light: '#4A6FBD',     // Lighter shade for alternating accordions
+      dark: '#0D2B6B',      // Darker shade for hover/expanded states
+      contrastText: '#fff',
     },
     secondary: {
       main: '#dc004e',
       light: '#ff5983',
       dark: '#9a0036',
     },
+    success: {
+      main: '#2e7d32',
+    },
+    warning: {
+      main: '#ed6c02',
+      dark: '#e65100',
+    },
+    error: {
+      main: '#d32f2f',
+    },
+    text: {
+      primary: '#333333',
+      secondary: '#717680',
+    },
     background: {
       default: '#f5f5f5',
+      paper: '#ffffff',
+    },
+    grey: {
+      100: '#f8f9fa',
+      200: '#e9ecef',
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    h1: {
-      fontSize: '2.5rem',
+     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+    h5: {
       fontWeight: 600,
     },
-    h2: {
-      fontSize: '2rem',
+    h6: {
+      fontWeight: 600,
+    },
+    subtitle1: {
       fontWeight: 600,
     },
   },
@@ -47,14 +68,18 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           borderRadius: 8,
+          fontWeight: 600,
         },
       },
     },
-    MuiCard: {
+ 
+    MuiAccordion: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+          borderRadius: '8px !important',
+          '&:before': {
+            display: 'none',
+          },
         },
       },
     },

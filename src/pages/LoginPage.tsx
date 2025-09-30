@@ -16,10 +16,13 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 // Common components
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
+import { useTheme } from '@mui/material/styles';
+import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
 
 interface FormData {
   email: string;
   password: string;
+  agreedToPrivacy: boolean;
 }
 
 interface FormErrors {
@@ -30,17 +33,19 @@ interface FormErrors {
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  
+  const theme = useTheme();
+
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
+    agreedToPrivacy: false,
   });
-  
+
   const [errors, setErrors] = useState<FormErrors>({
     email: '',
     password: '',
   });
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -69,8 +74,11 @@ const LoginPage: React.FC = () => {
   const handleInputChange = (field: keyof FormData) => (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const value = event.target.value;
-    setFormData(prev => ({ ...prev, [field]: value }));
+    const target = event.target as HTMLInputElement;
+    let value: string | boolean =
+      target.type === 'checkbox' ? target.checked : target.value;
+
+    setFormData(prev => ({ ...prev, [field]: value as any }));
 
     // Clear errors when user types
     if (field === 'email' && errors.email) {
@@ -95,6 +103,10 @@ const LoginPage: React.FC = () => {
       return;
     }
 
+    if (!formData.agreedToPrivacy) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     // SIMPLIFIED: Store and navigate (no API call)
@@ -109,7 +121,7 @@ const LoginPage: React.FC = () => {
   };
 
   const handleReset = () => {
-    setFormData({ email: '', password: '' });
+    setFormData({ email: '', password: '', agreedToPrivacy: false });
     setErrors({ email: '', password: '' });
     setSuccessMessage('');
   };
@@ -117,9 +129,10 @@ const LoginPage: React.FC = () => {
   const isLoginDisabled =
     !formData.email.trim() ||
     !formData.password.trim() ||
+    !formData.agreedToPrivacy ||
     !!errors.email ||
     !!errors.password;
-
+    
   return (
     <Box
       component="main"
@@ -136,7 +149,7 @@ const LoginPage: React.FC = () => {
         sx={{
           width: { xs: '100%', lg: '708px' },
           height: { xs: '392px', lg: '923px' },
-          backgroundColor: '#003473',
+          backgroundColor: '#1849A9',
           color: '#FFFFFF',
           position: 'relative',
           display: 'flex',
@@ -183,17 +196,18 @@ const LoginPage: React.FC = () => {
         <Box
           sx={{
             textAlign: 'center',
-            px: { xs: 2, lg: 4 },
-            maxWidth: { xs: 280, lg: '480px' },
+            px: { xs: '16px', lg: 0 },
+            maxWidth: { xs: '100%', lg: '420px' },
+            mx: 'auto',
           }}
         >
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 700,
-              fontSize: { xs: '24px', lg: '2.5rem' },
-              lineHeight: 1.1,
-              mb: { xs: 0.5, lg: 1 },
+              fontSize: { xs: '20px', lg: '40px' },
+              lineHeight: { xs: '24px', lg: '40px' },
+              mb: { xs: '16px', lg: '24px' },
             }}
           >
             {t('common:branding.companyName')}
@@ -201,10 +215,11 @@ const LoginPage: React.FC = () => {
 
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 400,
-              fontSize: { xs: '16px', lg: '1.25rem' },
-              mb: { xs: 1, lg: 1.5 },
+              fontSize: { xs: '14px', lg: '24px' },
+              lineHeight: { xs: '18px', lg: '24px' },
+              mb: { xs: '12px', lg: '24px' },
             }}
           >
             {t('common:branding.tagline')}
@@ -212,10 +227,10 @@ const LoginPage: React.FC = () => {
 
           <Typography
             sx={{
-              fontFamily: 'Inter, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 400,
-              fontSize: { xs: '12px', lg: '1rem' },
-              lineHeight: 1.5,
+              fontSize: { xs: '12px', lg: '16px' },
+              lineHeight: { xs: '18px', lg: '26px' },
             }}
           >
             {t('common:branding.description')}
@@ -252,17 +267,29 @@ const LoginPage: React.FC = () => {
             gap: 3,
           }}
         >
+
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 600,
-              fontSize: { xs: '24px', md: '2rem' },
-              textAlign: 'center',
-              color: '#4B5563',
-              mt: { xs: 0, md: 1 },
+              fontSize: { xs: '20px', md: '24px' },
+              color: theme.palette.text.primary,
+              lineHeight: 1,
             }}
           >
             {t('auth:login.title')}
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: 'Poppins',
+              fontWeight: 400,
+              fontSize: { xs: '14px', md: '16px' },
+              color: theme.palette.text.secondary,
+              lineHeight: 1.2,
+              mt: 0.25,
+            }}
+          >
+            {t('auth:login.subtitle')}
           </Typography>
 
           {/* Success Message */}
@@ -310,30 +337,50 @@ const LoginPage: React.FC = () => {
               }}
             />
 
-            <Box sx={{ textAlign: 'right' }}>
-              <Link
-                href="#"
-                underline="always"
-                sx={{
-                  color: '#1976d2',
-                  fontSize: '12px',
-                  fontFamily: 'Inter, Arial, sans-serif',
-                }}
-              >
-                {t('auth:login.forgotPassword')}
-              </Link>
-            </Box>
+            <CommonCheckbox
+              checked={formData.agreedToPrivacy}
+              onChange={handleInputChange('agreedToPrivacy')}
+              label={
+                <Typography
+                  sx={{
+                    fontFamily: 'Poppins',
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    color: theme.palette.text.secondary,
+                    lineHeight: '18px'
+                  }}
+                >
+                  
+                  {t('auth:login.termsAgreement')}
+                  <Link
+                    href="#"
+                    underline="always"
+                    sx={{
+                      fontSize: '12px',
+                      fontFamily: 'Poppins',
+                      fontWeight: 400,
+                      lineHeight: '18px'
+                    }}
+                  >
+                    {t('auth:register.privacyPolicy')}
+                  </Link>
+                  .
+                </Typography>
+              }
+              checkboxProps={{
+                sx: {
+                  mr: 1,
+                }
+              }}
+              labelProps={{
+                sx: {
+                  alignItems: 'flex-start',
+                  pl: 0,
+                }
+              }}
+            />
 
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <CommonButton
-                variant="secondary"
-                onClick={handleReset}
-                sx={{ flex: 1 }}
-                disabled={isSubmitting}
-              >
-                {t('common:buttons.reset')}
-              </CommonButton>
-
               <CommonButton
                 type="submit"
                 variant="primary"
@@ -348,9 +395,10 @@ const LoginPage: React.FC = () => {
             <Box sx={{ textAlign: 'center', mt: 2 }}>
               <Typography
                 sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontSize: '14px',
-                  color: '#666666',
+                  fontFamily: 'Poppins',
+                  fontSize: '16px',
+                  fontWeight: 400,
+                  color: '#717680',
                 }}
               >
                 {t('auth:login.noAccount')}{' '}
@@ -358,9 +406,9 @@ const LoginPage: React.FC = () => {
                   href="/"
                   underline="always"
                   sx={{
-                    color: '#1976d2',
-                    fontSize: '14px',
+                    fontSize: '16px',
                     fontWeight: 500,
+                    fontFamily: 'Poppins'
                   }}
                 >
                   {t('auth:login.signUpLink')}

@@ -40,8 +40,8 @@ const CommonButton: React.FC<CommonButtonProps> = ({
         boxShadow: '0px 1px 2px rgba(10,13,18,0.05)',
         
         ...(variant === 'primary' && {
-          backgroundColor: '#1976d2',
-          border: '1px solid #1976d2',
+          backgroundColor: '#1849A9',
+          border: '1px solid #1849A9',
           color: '#FFFFFF',
           '&:hover': {
             backgroundColor: '#1565c0',

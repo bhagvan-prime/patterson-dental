@@ -19,71 +19,55 @@ import {
   CheckCircle as ReviewIcon
 } from '@mui/icons-material';
 
+import { useTranslation } from 'react-i18next';
+
 interface StepStatus {
   completed: boolean;
   current: boolean;
 }
 
-// MOVE THIS OUTSIDE THE COMPONENT
-const steps = [
-  { 
-    label: 'About You and Your Practice', 
-    path: '/step1', 
-    shortLabel: 'About You', 
-    icon: <PersonIcon />,
-    line1: 'About You and',
-    line2: 'Your Practice'
-  },
-  { 
-    label: 'Practice Licensing', 
-    path: '/step2', 
-    shortLabel: 'Licensing', 
-    icon: <LicenseIcon />,
-    line1: 'Practice',
-    line2: 'Licensing'
-  },
-  { 
-    label: 'Credit Account', 
-    path: '/step3', 
-    shortLabel: 'Credit', 
-    icon: <CreditIcon />,
-    line1: 'Credit',
-    line2: 'Account'
-  },
-  { 
-    label: 'Patterson Advantage', 
-    path: '/step5', 
-    shortLabel: 'Advantage', 
-    icon: <LoyaltyIcon />,
-    line1: 'Patterson',
-    line2: 'Advantage'
-  },
-  { 
-    label: 'Tax Exemption Status', 
-    path: '/step6', 
-    shortLabel: 'Tax Exempt', 
-    icon: <TaxIcon />,
-    line1: 'Tax Exemption',
-    line2: 'Status'
-  },
-  { 
-    label: 'Review and Submit', 
-    path: '/step7', 
-    shortLabel: 'Review', 
-    icon: <ReviewIcon />,
-    line1: 'Review and',
-    line2: 'Submit'
-  }
-];
-
 const StepperTabs: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const steps = [
+    { 
+      path: '/step1', 
+      icon: <PersonIcon />,
+      translationKey: 'aboutYou'
+    },
+    { 
+      path: '/step2', 
+      icon: <LicenseIcon />,
+      translationKey: 'licensing'
+    },
+    { 
+      path: '/step3', 
+      icon: <CreditIcon />,
+      translationKey: 'credit'
+    },
+    { 
+      path: '/step5', 
+      icon: <LoyaltyIcon />,
+      translationKey: 'advantage'
+    },
+    { 
+      path: '/step6', 
+      icon: <TaxIcon />,
+      translationKey: 'taxExempt'
+    },
+    { 
+      path: '/step7', 
+      icon: <ReviewIcon />,
+      translationKey: 'review'
+    }
+  ];
 
   const [value, setValue] = useState(0);
   const [stepStatuses, setStepStatuses] = useState<StepStatus[]>([
@@ -134,6 +118,7 @@ const StepperTabs: React.FC = () => {
   };
 
   const renderTabLabel = (step: typeof steps[0]) => {
+    const stepKey = step.translationKey;
     return (
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         {!isMobile && step.icon}
@@ -141,15 +126,15 @@ const StepperTabs: React.FC = () => {
         {isDesktop ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
             <Typography variant="inherit" sx={{ fontSize: '0.8rem' }}>
-              {step.line1}
+              {t(`stepper:steps.${stepKey}.line1`)}
             </Typography>
             <Typography variant="inherit" sx={{ fontSize: '0.8rem' }}>
-              {step.line2}
+              {t(`stepper:steps.${stepKey}.line2`)}
             </Typography>
           </Box>
         ) : (
           <Typography variant="inherit">
-            {step.shortLabel}
+            {t(`stepper:steps.${stepKey}.short`)}
           </Typography>
         )}
       </Box>
@@ -164,12 +149,28 @@ const StepperTabs: React.FC = () => {
           component="h1" 
           gutterBottom 
           sx={{ 
-            textAlign: 'center', 
+            textAlign: 'left', 
             fontWeight: 600,
-            color: 'primary.main'
+            color: 'primary.main',
+            fontSize: '24px',
+            alignItems: 'left'
           }}
         >
-          Customer Onboarding
+          Setup your account
+        </Typography>
+        <Typography 
+          variant="h4" 
+          component="h1" 
+          gutterBottom 
+          sx={{ 
+            textAlign: 'left', 
+            fontWeight: 400,
+            fontFamily: 'Poppins',
+            fontSize: '16px',
+            color: '#666666',
+          }}
+        >
+          Please provide your professional information to get started with Patterson service
         </Typography>
       </Container>
 

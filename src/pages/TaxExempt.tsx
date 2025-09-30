@@ -149,7 +149,11 @@ const TaxExempt: React.FC = () => {
               value={formData.exemptionCertificateNumber}
               onChange={handleInputChange('exemptionCertificateNumber')}
               size="small"
-              sx={{ mb: 2, minWidth: 300, maxWidth: 500 }}
+              sx={{ 
+                mb: 2, 
+                width: '100%',
+                maxWidth: { xs: '100%', sm: 500 }
+              }}
             />
 
             {/* Different Certificate Checkbox */}
@@ -237,7 +241,7 @@ const TaxExempt: React.FC = () => {
                 variant="primary"
                 component="label"
                 sx={{
-                  minWidth: 140,
+                  minWidth: { xs: '100%', sm: 140 },
                   py: 1,
                   fontSize: '0.95rem',
                   fontWeight: 600,
@@ -263,7 +267,8 @@ const TaxExempt: React.FC = () => {
                   }
                 }}
                 sx={{
-                  minWidth: isMobile ? 'auto' : 300,
+                  width: '100%',
+                  minWidth: { xs: 'auto', sm: 300 },
                   flex: 1,
                 }}
               />

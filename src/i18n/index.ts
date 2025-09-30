@@ -12,6 +12,7 @@ import licensingEN from './locales/en/licensing.json';
 import taxexemptEN from './locales/en/taxexempt.json';
 import advantageEN from './locales/en/advantage.json';
 import reviewEN from './locales/en/review.json';
+import stepperEN from './locales/en/stepper.json';
 
 /**
  * i18n Configuration with Namespacing
@@ -42,6 +43,7 @@ const resources = {
     taxexempt: taxexemptEN,
     advantage: advantageEN,
     review: reviewEN,
+    stepper: stepperEN
   },
   // Add more languages here later:
   // es: {

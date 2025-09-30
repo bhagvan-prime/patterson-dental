@@ -231,6 +231,8 @@ const AboutYouAndYourPractice: React.FC = () => {
                 },
                 '& .MuiAccordionSummary-content': {
                   margin: '8px 0',
+                },'& .MuiAccordionSummary-expandIconWrapper': {
+                  color: 'white',
                 },
               }}
             >
@@ -325,6 +327,8 @@ const AboutYouAndYourPractice: React.FC = () => {
                 },
                 '& .MuiAccordionSummary-content': {
                   margin: '8px 0',
+                },'& .MuiAccordionSummary-expandIconWrapper': {
+                  color: 'white',
                 },
               }}
             >
@@ -450,6 +454,8 @@ const AboutYouAndYourPractice: React.FC = () => {
                 },
                 '& .MuiAccordionSummary-content': {
                   margin: '8px 0',
+                },'& .MuiAccordionSummary-expandIconWrapper': {
+                  color: 'white',
                 },
               }}
             >
@@ -641,6 +647,8 @@ const AboutYouAndYourPractice: React.FC = () => {
                 },
                 '& .MuiAccordionSummary-content': {
                   margin: '8px 0',
+                },'& .MuiAccordionSummary-expandIconWrapper': {
+                  color: 'white',
                 },
               }}
             >

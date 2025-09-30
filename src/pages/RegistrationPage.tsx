@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import CommonInput from '../components/commons/inputs/PRInput';
 import CommonButton from '../components/commons/buttons/PRButton';
 import CommonCheckbox from '../components/commons/inputs/PRCheckbox';
+import { useTheme } from '@mui/material/styles';
 
 interface FormData {
   firstName: string;
@@ -32,18 +33,19 @@ interface FormErrors {
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  
+  const theme = useTheme();
+
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     agreedToTerms: false,
   });
-  
+
   const [errors, setErrors] = useState<FormErrors>({
     email: '',
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -100,10 +102,10 @@ const RegistrationPage: React.FC = () => {
     setTimeout(() => {
       localStorage.setItem('registration_email', formData.email);
       localStorage.setItem('registration_name', `${formData.firstName} ${formData.lastName}`);
-      
+
       setSuccessMessage(t('auth:register.success'));
       setIsSubmitting(false);
-      
+
       setTimeout(() => {
         navigate('/create-password');
       }, 1000);
@@ -144,7 +146,7 @@ const RegistrationPage: React.FC = () => {
         sx={{
           width: { xs: '100%', lg: '708px' },
           height: { xs: '392px', lg: '923px' },
-          backgroundColor: '#003473',
+          backgroundColor: '#1849A9',
           color: '#FFFFFF',
           position: 'relative',
           display: 'flex',
@@ -191,17 +193,18 @@ const RegistrationPage: React.FC = () => {
         <Box
           sx={{
             textAlign: 'center',
-            px: { xs: 2, lg: 4 },
-            maxWidth: { xs: 280, lg: '480px' },
+            px: { xs: '16px', lg: 0 },
+            maxWidth: { xs: '100%', lg: '420px' },
+            mx: 'auto',
           }}
         >
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 700,
-              fontSize: { xs: '24px', lg: '2.5rem' },
-              lineHeight: 1.1,
-              mb: { xs: 0.5, lg: 1 },
+              fontSize: { xs: '20px', lg: '40px' },
+              lineHeight: { xs: '24px', lg: '40px' },
+              mb: { xs: '16px', lg: '24px' },
             }}
           >
             {t('common:branding.companyName')}
@@ -209,10 +212,11 @@ const RegistrationPage: React.FC = () => {
 
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 400,
-              fontSize: { xs: '16px', lg: '1.25rem' },
-              mb: { xs: 1, lg: 1.5 },
+              fontSize: { xs: '14px', lg: '24px' },
+              lineHeight: { xs: '18px', lg: '24px' },
+              mb: { xs: '12px', lg: '24px' },
             }}
           >
             {t('common:branding.tagline')}
@@ -220,10 +224,10 @@ const RegistrationPage: React.FC = () => {
 
           <Typography
             sx={{
-              fontFamily: 'Inter, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 400,
-              fontSize: { xs: '12px', lg: '1rem' },
-              lineHeight: 1.5,
+              fontSize: { xs: '12px', lg: '16px' },
+              lineHeight: { xs: '18px', lg: '26px' },
             }}
           >
             {t('common:branding.description')}
@@ -263,15 +267,26 @@ const RegistrationPage: React.FC = () => {
         >
           <Typography
             sx={{
-              fontFamily: 'Poppins, Roboto, Arial, sans-serif',
+              fontFamily: 'Poppins',
               fontWeight: 600,
-              fontSize: { xs: '24px', md: '2rem' },
-              textAlign: 'center',
-              color: '#4B5563',
-              mt: { xs: 0, md: 1 },
+              fontSize: { xs: '20px', md: '24px' },
+              color: theme.palette.text.primary,
+              lineHeight: 1,
             }}
           >
             {t('auth:register.title')}
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: 'Poppins',
+              fontWeight: 400,
+              fontSize: { xs: '14px', md: '16px' },
+              color: theme.palette.text.secondary,
+              lineHeight: 1.2,
+              mt: 0.25,
+            }}
+          >
+            {t('auth:register.subtitle')}
           </Typography>
 
           {/* Success Message */}
@@ -315,17 +330,23 @@ const RegistrationPage: React.FC = () => {
               label={
                 <Typography
                   sx={{
-                    fontFamily: 'Arial, Inter, sans-serif',
+                    fontFamily: 'Poppins',
                     fontWeight: 400,
                     fontSize: '12px',
-                    color: '#666666',
+                    color: theme.palette.text.secondary,
+                    lineHeight: '18px'
                   }}
                 >
                   {t('auth:register.termsAgreement')}
                   <Link
                     href="#"
                     underline="always"
-                    sx={{ color: '#1976d2', fontSize: '12px' }}
+                    sx={{
+                      fontSize: '12px',
+                      fontFamily: 'Poppins',
+                      fontWeight: 400,
+                      lineHeight: '18px'
+                    }}
                   >
                     {t('auth:register.privacyPolicy')}
                   </Link>
@@ -345,14 +366,6 @@ const RegistrationPage: React.FC = () => {
             />
 
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <CommonButton
-                variant="secondary"
-                onClick={handleCancel}
-                sx={{ flex: 1 }}
-                disabled={isSubmitting}
-              >
-                {t('common:buttons.cancel')}
-              </CommonButton>
 
               <CommonButton
                 type="submit"
@@ -361,16 +374,16 @@ const RegistrationPage: React.FC = () => {
                 loading={isSubmitting}
                 sx={{ flex: 1 }}
               >
-                {t('common:buttons.continue')}
+                {t('common:buttons.createAccount')}
               </CommonButton>
             </Box>
 
             <Box sx={{ textAlign: 'center', mt: 1 }}>
               <Typography
                 sx={{
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  fontSize: '14px',
-                  color: '#666666',
+                  fontFamily: 'Poppins',
+                  fontSize: '16px',
+                  color: theme.palette.text.secondary,
                 }}
               >
                 {t('auth:register.haveAccount')}{' '}
@@ -378,12 +391,12 @@ const RegistrationPage: React.FC = () => {
                   href="/login"
                   underline="always"
                   sx={{
-                    color: '#1976d2',
-                    fontSize: '14px',
-                    fontWeight: 500,
+                    fontSize: '16px',
+                    fontWeight: 400,
+                    fontFamily: 'Poppins',
                   }}
                 >
-                  {t('auth:register.signInLink')}
+                  {t('auth:register.logIn')}
                 </Link>
               </Typography>
             </Box>

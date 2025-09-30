@@ -6,55 +6,44 @@ import {
   Box,
   Menu,
 } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  // const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  // const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
-  // const handleNavigation = (path: string) => {
-  //   navigate(path);
-  //   handleMenuClose();
-  // };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppBar position="static">
         <Toolbar>
           <Box
-                    component="img"
-                    src="/images/logo.png"
-                    alt="Patterson Dental Logo"
-                    sx={{
-                      position: { xs: 'relative', lg: 'absolute' },
-                      top: { lg: '5px' }, 
-                      left: { lg: '53px' }, 
-                      
-                      // >>>>>> CORRECTED LOGO DIMENSIONS BASED ON YOUR LATEST SPECS <<<<<<
-                      width: { xs: '50px', lg: '113px' }, 
-                      height: { xs: '30px', lg: '53px' },   
-                      objectFit: 'contain',
-                      
-                      // Mobile alignment within the blue box
-                      alignSelf: {xs: 'flex-start', lg: 'auto'},
-                      mt: { xs: 1, lg: 0 },
-                      mb: { xs: 2, lg: 0 },
-                      // Removed specific mobile left margin as alignSelf and parent padding should handle it
-                    }}
-                  />
-          
+            component="img"
+            src="/images/logo.png"
+            alt="Patterson Dental Logo"
+            sx={{
+              position: { xs: 'relative', lg: 'absolute' },
+              top: { lg: '5px' },
+              left: { lg: '53px' },
+
+              // >>>>>> CORRECTED LOGO DIMENSIONS BASED ON YOUR LATEST SPECS <<<<<<
+              width: { xs: '50px', lg: '91px' },
+              height: { xs: '30px', lg: '51px' },
+              objectFit: 'contain',
+
+              // Mobile alignment within the blue box
+              alignSelf: { xs: 'flex-start', lg: 'auto' },
+              mt: { xs: 1, lg: 0 },
+              mb: { xs: 2, lg: 0 },
+              // Removed specific mobile left margin as alignSelf and parent padding should handle it
+            }}
+          />
+
           {/* Desktop Navigation */}
           {/* <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
             <Button color="inherit" onClick={() => navigate('/home')}>

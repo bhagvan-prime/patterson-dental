@@ -10,7 +10,7 @@ import { Container } from '@mui/material';
 import { store } from './store/store';
 
 // Theme
-import theme from './theme';
+import theme from './theme/theme';
 
 // Components
 import Layout from './components/layout/Layout';

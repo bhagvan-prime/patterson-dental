@@ -1,16 +1,18 @@
 {
   "buttons": {
     "save": "Save",
-    "cancel": "cancel",
+    "cancel": "Cancel",
     "continue": "continue",
     "back": "Back",
     "reset": "Reset",
     "submit": "Submit",
-    "login": "Login",
+    "login": "Log In",
     "logout": "Logout",
     "signUp": "Sign Up",
     "close": "Close",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "createAccount": "Create Account",
+    "savePassword": "Save Password"
   },
   "validation": {
     "required": "This field is required.",
