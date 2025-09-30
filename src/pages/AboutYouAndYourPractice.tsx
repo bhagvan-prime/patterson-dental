@@ -181,7 +181,6 @@ const AboutYouAndYourPractice: React.FC = () => {
   };
 
   const handleSave = (section: string) => {
-    console.log(`Saving ${section}:`, formData);
     if (section === 'practitioner-info') {
       setEditMode((prev) => ({ ...prev, panel1: false }));
     } else if (section === 'practice-info') {
@@ -194,7 +193,6 @@ const AboutYouAndYourPractice: React.FC = () => {
   };
 
   const handleNext = (section: string) => {
-    console.log(`Next from ${section}:`, formData);
     if (section === 'practitioner-info') {
       setExpanded('panel2');
     } else if (section === 'practice-info') {
@@ -205,7 +203,6 @@ const AboutYouAndYourPractice: React.FC = () => {
   };
 
   const handleNextStep = () => {
-    console.log('Moving to next step (Licensing):', formData);
     navigate('/step2');
   };
 

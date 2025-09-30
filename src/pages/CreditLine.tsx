@@ -75,12 +75,10 @@ const CreditLine: React.FC = () => {
   };
 
   const handleBackStep = () => {
-    console.log('Going back to previous step');
     navigate('/step2');
   };
 
   const handleNextStep = () => {
-    console.log('Moving to next step:', formData);
     navigate('/step5');
   };
 

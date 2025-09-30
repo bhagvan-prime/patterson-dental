@@ -136,7 +136,6 @@ const CreatePasswordPage: React.FC = () => {
 
     // SIMPLIFIED: Store and navigate (no API call)
     setTimeout(() => {
-      console.log('Password created successfully');
       
       // Clear registration data
       localStorage.removeItem('registration_email');

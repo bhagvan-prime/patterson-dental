@@ -94,12 +94,10 @@ const TaxExempt: React.FC = () => {
   };
 
   const handleBackStep = () => {
-    console.log('Going back to previous step');
     navigate('/step5');
   };
 
   const handleNextStep = () => {
-    console.log('Moving to next step:', formData);
     navigate('/step7');
   };
 

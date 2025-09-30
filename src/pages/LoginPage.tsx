@@ -99,8 +99,6 @@ const LoginPage: React.FC = () => {
 
     // SIMPLIFIED: Store and navigate (no API call)
     setTimeout(() => {
-      console.log('Login successful');
-      
       setSuccessMessage(t('auth:login.success'));
       setIsSubmitting(false);
 

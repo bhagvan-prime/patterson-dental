@@ -18,7 +18,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  FormHelperText
 } from '@mui/material';
 import {
   ExpandMore as ExpandMoreIcon,
@@ -124,7 +123,6 @@ const AutoPayEnrollment: React.FC = () => {
   };
 
   const handleSave = (panel: keyof typeof editMode) => {
-    console.log(`Saving ${panel}:`, formData);
     setEditMode(prev => ({ ...prev, [panel]: false }));
   };
 
@@ -134,21 +132,15 @@ const AutoPayEnrollment: React.FC = () => {
   };
 
   const handleBackStep = () => {
-    console.log('Going back to previous step');
     navigate('/step3');
   };
 
   const handleNextStep = () => {
-    console.log('Moving to next step:', formData);
     navigate('/step5');
   };
 
   const isACH = formData.paymentMethodType === 'ACH';
   const isCreditCard = formData.paymentMethodType === 'CreditCard';
-  const isFormValid = formData.enrollmentConsent && formData.paymentMethodType && (
-    (isACH && formData.bankName && formData.routingNumber && formData.accountNumber && formData.accountType) ||
-    (isCreditCard && formData.cardHolderName && formData.cardNumber && formData.expiryDate && formData.cvv)
-  );
 
   return (
     <Container maxWidth="lg" sx={{ py: 1 }}>

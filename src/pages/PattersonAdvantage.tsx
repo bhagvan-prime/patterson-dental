@@ -44,7 +44,6 @@ const PattersonAdvantage: React.FC = () => {
   };
 
   const handleEnrollment = () => {
-    console.log('Enrollment data:', enrollmentData);
     setModalOpen(false);
     setEnrollmentData({ name: '', email: '' });
   };
@@ -59,12 +58,10 @@ const PattersonAdvantage: React.FC = () => {
   };
 
   const handleBackStep = () => {
-    console.log('Going back to previous step');
     navigate('/step4');
   };
 
   const handleNextStep = () => {
-    console.log('Moving to next step');
     navigate('/step6');
   };
 

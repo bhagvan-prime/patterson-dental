@@ -80,7 +80,6 @@ const PractitionerLicensing: React.FC = () => {
   };
 
   const handleSave = (section: string) => {
-    console.log(`Saving ${section}:`, formData);
     if (section === 'practitioner-licensing') {
       setEditMode((prev) => ({ ...prev, panel1: false }));
     } else if (section === 'tdddd-info') {
@@ -89,19 +88,16 @@ const PractitionerLicensing: React.FC = () => {
   };
 
   const handleNext = (section: string) => {
-    console.log(`Next from ${section}:`, formData);
     if (section === 'practitioner-licensing') {
       setExpanded('panel2');
     }
   };
 
   const handleBackStep = () => {
-    console.log('Going back to previous step');
     navigate('/step1');
   };
 
   const handleNextStep = () => {
-    console.log('Moving to next step:', formData);
     navigate('/step3');
   };
 

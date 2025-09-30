@@ -10,10 +10,11 @@ import {
 } from '@mui/material';
 import {
   Home as HomeIcon,
-  Info as InfoIcon,
-  LinearScale as StepperIcon,
-  ViewList as VerticalIcon
 } from '@mui/icons-material';
+
+ const tabs = [
+    { label: 'Home', path: '/home', icon: <HomeIcon /> },
+  ];
 
 const NavigationTabs: React.FC = () => {
   const navigate = useNavigate();
@@ -22,13 +23,6 @@ const NavigationTabs: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   const [value, setValue] = useState(0);
-
-  const tabs = [
-    { label: 'Home', path: '/home', icon: <HomeIcon /> },
-    // { label: 'About', path: '/about', icon: <InfoIcon /> },
-    // { label: 'Stepper', path: '/stepper', icon: <StepperIcon /> },
-    // { label: 'Vertical Stepper', path: '/vertical', icon: <VerticalIcon /> },
-  ];
 
   // Update tab value based on current location
   useEffect(() => {

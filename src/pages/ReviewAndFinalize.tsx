@@ -78,8 +78,6 @@ const ReviewAndFinalize: React.FC = () => {
 
   const handleFinalSubmit = () => {
     setIsSubmitting(true);
-    console.log('Final Data Submission:', formData);
-    console.log('Electronic Signature:', electronicSignature);
     setTimeout(() => {
       setIsSubmitting(false);
       setShowSuccessModal(true);
@@ -87,7 +85,6 @@ const ReviewAndFinalize: React.FC = () => {
   };
 
   const handleBackStep = () => {
-    console.log('Going back to previous step');
     navigate('/step6');
   };
 
