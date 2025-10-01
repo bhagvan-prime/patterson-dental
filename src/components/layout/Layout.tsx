@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               left: { lg: '53px' },
 
               // >>>>>> CORRECTED LOGO DIMENSIONS BASED ON YOUR LATEST SPECS <<<<<<
-              width: { xs: '50px', lg: '91px' },
+              width: { xs: '60px', lg: '91px' },
               height: { xs: '30px', lg: '51px' },
               objectFit: 'contain',
 

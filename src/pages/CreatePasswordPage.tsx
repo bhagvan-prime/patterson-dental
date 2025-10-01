@@ -163,6 +163,7 @@ const CreatePasswordPage: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: { xs: 2.5, md: 3 },
+          mt: { xs: 0, md: '60px' },
         }}
       >
         <Typography
