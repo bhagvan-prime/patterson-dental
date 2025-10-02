@@ -28,6 +28,7 @@ import CreditLine from './pages/CreditLine';
 import PattersonAdvantage from './pages/PattersonAdvantage';
 import TaxExempt from './pages/TaxExempt';
 import ReviewAndFinalize from './pages/ReviewAndFinalize';
+import ScrollToTop from './components/ScrollToTop';
 
 /**
  * AppContent - Handles conditional layout rendering
@@ -87,6 +88,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
+        <ScrollToTop />
           <AppContent />
         </Router>
       </ThemeProvider>

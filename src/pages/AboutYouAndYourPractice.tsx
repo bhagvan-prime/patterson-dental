@@ -85,12 +85,12 @@ const AboutYouAndYourPractice: React.FC = () => {
   ];
 
   const specialityOptions: SelectOption[] = [
-    { label: t('aboutYou:specialities.generalMedicine'), value: 'General Medicine' },
-    { label: t('aboutYou:specialities.cardiology'), value: 'Cardiology' },
-    { label: t('aboutYou:specialities.dermatology'), value: 'Dermatology' },
-    { label: t('aboutYou:specialities.orthopedics'), value: 'Orthopedics' },
-    { label: t('aboutYou:specialities.pediatrics'), value: 'Pediatrics' },
-    { label: t('aboutYou:specialities.other'), value: 'Other' },
+    { label: t('aboutYou:specialities.pediatricDentistry'), value: 'Pediatric Dentistry' },
+    { label: t('aboutYou:specialities.orthodontics'), value: 'Orthodontics' },
+    { label: t('aboutYou:specialities.periodontics'), value: 'Periodontics' },
+    { label: t('aboutYou:specialities.endodontics'), value: 'Endodontics' },
+    { label: t('aboutYou:specialities.prosthodontics'), value: 'Prosthodontics' },
+    { label: t('aboutYou:specialities.oralSurgery'), value: 'Oral Surgery' },
   ];
 
   const locationOptions: SelectOption[] = [

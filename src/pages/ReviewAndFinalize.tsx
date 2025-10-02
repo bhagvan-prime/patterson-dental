@@ -41,10 +41,7 @@ const mockFetchAllData = (): AllFormData => ({
   step2: { licenseNumber: 'MED12345', npiNumber: '1234567890' },
   step3: { creditLimitRequested: '$50,000', creditApplicationStatus: 'New' },
   step4: { paymentMethodType: 'ACH', isPrimaryMethod: true },
-  step5: {
-    enrollmentDecision: 'Enroll',
-    preferredRewardType: 'Product Discounts',
-  },
+  step5: { enrollmentDecision: 'Enroll', preferredRewardType: 'Product Discounts'},
   step6: { isTaxExempt: 'Yes', documentFileName: 'TaxCert_10_2025.pdf' },
 });
 

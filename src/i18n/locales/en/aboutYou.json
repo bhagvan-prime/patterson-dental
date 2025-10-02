@@ -49,12 +49,12 @@
     "moreThan20": "More than 20 years"
   },
   "specialities": {
-    "generalMedicine": "General Medicine",
-    "cardiology": "Cardiology",
-    "dermatology": "Dermatology",
-    "orthopedics": "Orthopedics",
-    "pediatrics": "Pediatrics",
-    "other": "Other"
+    "pediatricDentistry": "Pediatric Dentistry",
+    "orthodontics": "Orthodontics",
+    "periodontics": "Periodontics",
+    "endodontics": "Endodontics",
+    "prosthodontics": "Prosthodontics",
+    "oralSurgery": "Oral Surgery"
   },
   "locationOptions": {
     "1": "1",
