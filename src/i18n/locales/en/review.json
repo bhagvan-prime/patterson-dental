@@ -1,11 +1,11 @@
 {
   "header": "Review and Finalize Application",
   "steps": {
-    "step1": "1. About You and your Practice",
-    "step2": "2. Practitioner Licensing",
-    "step3": "3. Credit Account",
-    "step5": "4. Patterson Advantage",
-    "step6": "5. Tax Exemption Status"
+    "step1": "About You and your Practice",
+    "step2": "Practitioner Licensing",
+    "step3": "Credit Account",
+    "step5": "Patterson Advantage",
+    "step6": "Tax Exemption Status"
   },
   "buttons": {
     "edit": "Edit",

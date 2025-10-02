@@ -169,28 +169,22 @@ const ReviewAndFinalize: React.FC = () => {
                   <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
                     {step.label}
                   </Typography>
-                  <CommonButton
-                    variant="secondary"
-                    size="small"
+                  <EditIcon 
+                    sx={{ 
+                      ml: 2,
+                      mr: 1,
+                      color: 'white',
+                      fontSize: 20,
+                      cursor: 'pointer',
+                      '&:hover': {
+                        opacity: 0.8,
+                      }
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(step.path);
                     }}
-                    sx={{ 
-                      ml: 2,
-                      color: 'white',
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                      },
-                      '& .MuiSvgIcon-root': {
-                        color: 'white',
-                      }
-                    }}
-                  >
-                    <EditIcon sx={{ mr: 0.5, fontSize: 18 }} />
-                    {/* {t('review:buttons.edit')} */}
-                  </CommonButton>
+                  />
                 </Box>
               </AccordionSummary>
               <AccordionDetails sx={{ p: 1.5 }}>
